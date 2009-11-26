@@ -1,0 +1,26 @@
+BrainBurner - Datenbankbasierter Vokabeltrainer
+
+Projekt für das zweite Schuljahr der Berufsschule für Fachinformatiker/Anwendungsentwicklung.
+
+Developer:
+	Patrick Klautschek	<patrick.klautschek@gmail.com>
+	Lukas Grässlin		<lukasgraesslin@gmx.de>
+
+Szenario:
+	* Das Projekt soll eine auf Datenbank basierende Multiuser-Lernsoftware sein.
+	* Man kann mehrere User (inkl. Passwort) anlegen, die jeweils individuell beliebig viele Lerntabellen
+	  anlegen können. Jeder User darf sich selbst und die von ihm angelegten Tabellen löschen.
+	  Es wird einen Superuser geben, der alle User löschen darf.
+	* Die Lerntabellen sind nach dem Frage-Antwort-Prinzip aufgebaut.
+	* Im „Lern-Modus“ kann man dann eine vorher angelegte Lerntabelle auswählen und diese als
+	  Lerngrundlage benutzen. Außerdem können (bzw. müssen) in einer speziellen Tabelle Sprachen
+	  angelegt werden, die dann später beim Erstellten der Lerntabellen angegeben werden.
+	* Anhand der Ergebnisse wird eine Statistik erstellt, die die Lernerfolge beinhaltet.
+	* Speziell für das Lernen von Vokabeln soll die optionale Möglichkeit bestehen, dass sich das
+	  Programm falsche Antworten merkt und man sich diese später nochmal abfragen lassen kann. (Phasen)
+	* Für die Lerntabellen soll eine Suchfunktion zur Verfügung stehen.
+
+Nice-to-have:
+	* Man könnte zu Vokabeln optional deren Opposites und Synonyms eintragen, die dann in einer extra
+	  Tabelle gespeichert werden.
+	* Multi-Language-GUI
