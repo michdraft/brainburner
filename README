@@ -3,8 +3,8 @@ BrainBurner - Datenbankbasierter Vokabeltrainer
 Projekt für das zweite Schuljahr der Berufsschule für Fachinformatiker/Anwendungsentwicklung.
 
 Developer:
-	Patrick Klautschek	<patrick.klautschek@gmail.com>
-	Lukas Grässlin		<lukasgraesslin@gmx.de>
+	Patrick Klautschek <patrick.klautschek[at]gmail.com>
+	Lukas Grässlin     <lukasgraesslin[at]gmx.de>
 
 Szenario:
 	* Das Projekt soll eine auf Datenbank basierende Multiuser-Lernsoftware sein.
