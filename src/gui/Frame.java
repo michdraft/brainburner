@@ -2,6 +2,7 @@
  * Frame.java, package: gui
  * Extends JFrame and offers the base class for our frames.
  */
+
 package gui;
 
 import java.awt.Dimension;
