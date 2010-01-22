@@ -25,12 +25,14 @@ public class DBConnection {
 		}
 	}
 
-	public void updateDB(String query) {
+	public int updateDB(String query) {
 		try {
 			int n = statement.executeUpdate(query);
 			Helpers.debug("updateDB: %d lines updated.\n");
+			return n;
 		} catch (Exception e) {
 			Helpers.debug("Error: " + e.getMessage());
+			return -1;
 		}
 	}
 
