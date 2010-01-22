@@ -13,12 +13,23 @@ import java.security.NoSuchAlgorithmException;
 public class Helpers {
 	private static final boolean debug = true;
 
+	/**
+	 * Checks if a string is matching to a regex
+	 * @param regex The regex to match to
+	 * @param str The string the regex has to match to
+	 * @return Either true or false.
+	 */
 	public static boolean checkRegex(String regex, String str) {
 		Pattern pattern = Pattern.compile(regex);
 		Matcher matcher = pattern.matcher(str);
 		return matcher.matches();
 	}
 
+	/**
+	 * Creates a md5 hash from a string. Used for storing passwords.
+	 * @param str The plaintext string/password/whatever
+	 * @return md5_string The md5 hash. Otherwise null is returned.
+	 */
 	public static String stringToMD5(String str) {
 		try {
 			byte[] bytes = str.getBytes();
@@ -42,6 +53,10 @@ public class Helpers {
 		}
 	}
 
+	/**
+	 * Prints the string to stderr if debug is true.
+	 * @param str String to be printed to stderr.
+	 */
 	public static void debug(String str) {
 		if (debug)
 			System.err.println(str);

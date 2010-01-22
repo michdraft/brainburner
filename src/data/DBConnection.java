@@ -1,3 +1,8 @@
+/*
+ * DBConnection.java, Package: data
+ * Low-level implementation for the database connection.
+ */
+
 package data;
 
 import java.sql.Connection;
@@ -25,19 +30,36 @@ public class DBConnection {
 		}
 	}
 
+	/**
+	 * Executes an update query to the connected database.
+	 * @param query The query string.
+	 * @return n Number of lines updated. In case of an exception -1.
+	 */
 	public int updateDB(String query) {
 		try {
 			int n = statement.executeUpdate(query);
-			Helpers.debug("updateDB: %d lines updated.\n");
+			Helpers.debug("updateDB: Info: %d lines updated.\n");
 			return n;
 		} catch (Exception e) {
-			Helpers.debug("Error: " + e.getMessage());
+			Helpers.debug("updateDB: Error: " + e.getMessage());
 			return -1;
 		}
 	}
 
+	/**
+	 * Querys the connected database and returns a result set.
+	 * @param query The query string.
+	 * @return resultset The restultset with the containing data. In case
+	 * of an error it returns null
+	 */
 	public ResultSet queryDB(String query) {
-		/* FIXME: Needs to be implemented :) */
-		return null;
+		ResultSet resultset;
+		try {
+			resultset = statement.executeQuery(query);
+			return resultset;
+		} catch (Exception e) {
+			Helpers.debug("queryDB: Error: " + e.getMessage());
+			return null;
+		}
 	}
 }
