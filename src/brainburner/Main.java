@@ -6,9 +6,10 @@
 package brainburner;
 
 import gui.Frame;
+import gui.LoginFrame;
 
 public class Main {
 	public static void main(String[] args) {
-		new Frame(); /* just for testing */
+		new LoginFrame(); /* just for testing */
 	}
 }

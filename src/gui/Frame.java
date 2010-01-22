@@ -5,7 +5,6 @@
 
 package gui;
 
-import java.awt.Dimension;
 import javax.swing.JFrame;
 import javax.swing.UIManager;
 
@@ -14,7 +13,6 @@ import helper.*;
 public class Frame extends JFrame {
 	public Frame() {
 		this.setDefaultCloseOperation(EXIT_ON_CLOSE);
-		this.setMinimumSize(new Dimension(500, 350));
 		this.setVisible(true);
 
 		/*
