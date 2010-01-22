@@ -5,8 +5,7 @@
 
 package brainburner;
 
-import gui.Frame;
-import gui.LoginFrame;
+import gui.*;
 
 public class Main {
 	public static void main(String[] args) {
