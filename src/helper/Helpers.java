@@ -1,6 +1,6 @@
 /*
  * Messages.java, Package: helper
- * Several functions for checking inputs from the user, password handling etc.
+ * Misc function like checking regexes, md5 hash creating, debug infos etc.
  */
 
 package helper;
@@ -11,6 +11,8 @@ import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
 public class Helpers {
+	private static final boolean debug = true;
+
 	public static boolean checkRegex(String regex, String str) {
 		Pattern pattern = Pattern.compile(regex);
 		Matcher matcher = pattern.matcher(str);
@@ -38,5 +40,10 @@ public class Helpers {
 			System.out.println(e.getMessage());
 			return null;
 		}
+	}
+
+	public static void debug(String str) {
+		if (debug)
+			System.err.println(str);
 	}
 }
