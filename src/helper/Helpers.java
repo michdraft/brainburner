@@ -9,6 +9,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.util.Arrays;
 
 public class Helpers {
 	private static final boolean debug = true;
@@ -43,12 +44,15 @@ public class Helpers {
 			StringBuffer md5_string = new StringBuffer();
 
 			for (int i = 0; i < md5_bytes.length; i++) {
+				if (md5_bytes[i] <= 15 && md5_bytes[i] >= 0)
+					md5_string.append("0");
+
 				 md5_string.append(Integer.toHexString(0xFF & md5_bytes[i]));
 			}
 
 			return md5_string.toString();
 		} catch (NoSuchAlgorithmException e) {
-			System.out.println(e.getMessage());
+			Helpers.debug("stringToMD5: Error: %s", e.getMessage());
 			return null;
 		}
 	}
@@ -57,8 +61,18 @@ public class Helpers {
 	 * Prints the string to stderr if debug is true.
 	 * @param str String to be printed to stderr.
 	 */
-	public static void debug(String str) {
+	public static void debug(String format, Object... args) {
 		if (debug)
-			System.err.println(str);
+			System.err.printf(format, args);
+	}
+
+	/**
+	 * Compares two char arrays to be indentical.
+	 * @param password Password
+	 * @param password2 Passwort repeat
+	 * @return True if both passwords are identical.
+	 */
+	public static boolean cmpPasswords(char[] password, char[] password2) {
+		return Arrays.equals(password, password2);
 	}
 }

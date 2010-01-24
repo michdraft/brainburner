@@ -26,7 +26,7 @@ public class DBConnection {
 
 			statement = database.createStatement();
 		} catch (Exception e) {
-			System.out.printf("Error: %s\n", e.getMessage());
+			Helpers.debug("Error: %s\n", e.getMessage());
 		}
 	}
 
@@ -38,10 +38,10 @@ public class DBConnection {
 	public int updateDB(String query) {
 		try {
 			int n = statement.executeUpdate(query);
-			Helpers.debug("updateDB: Info: %d lines updated.\n");
+			Helpers.debug("updateDB: Info: %d lines updated.\n", n);
 			return n;
 		} catch (Exception e) {
-			Helpers.debug("updateDB: Error: " + e.getMessage());
+			Helpers.debug("updateDB: Error: %s", e.getMessage());
 			return -1;
 		}
 	}
@@ -58,7 +58,7 @@ public class DBConnection {
 			resultset = statement.executeQuery(query);
 			return resultset;
 		} catch (Exception e) {
-			Helpers.debug("queryDB: Error: " + e.getMessage());
+			Helpers.debug("queryDB: Error: %s", e.getMessage());
 			return null;
 		}
 	}

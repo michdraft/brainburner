@@ -9,6 +9,6 @@ import gui.*;
 
 public class Main {
 	public static void main(String[] args) {
-		new Frame(); /* just for testing */
+		new Users(); /* just for testing */
 	}
 }
