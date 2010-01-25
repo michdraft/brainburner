@@ -1,3 +1,8 @@
+/*
+ * Language.java, package: data
+ * This class capsulates the language data objects from the db.
+ */
+
 package data;
 
 public class Language {

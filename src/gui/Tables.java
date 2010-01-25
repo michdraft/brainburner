@@ -1,3 +1,8 @@
+/*
+ * Tables.java, package: gui
+ * Trivial form to create Language-Usertable relations
+ */
+
 package gui;
 
 import data.*;
