@@ -23,23 +23,28 @@
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" attributes="0">
-              <EmptySpace max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="1" attributes="0">
-                  <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
-                  <Component id="lbl_password" alignment="1" min="-2" max="-2" attributes="0"/>
-                  <Component id="lbl_username" alignment="1" min="-2" max="-2" attributes="0"/>
-                  <Component id="lbl_password2" alignment="1" min="-2" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Group type="102" attributes="0">
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="lbl_header" min="-2" max="-2" attributes="0"/>
+                  </Group>
+                  <Group type="102" alignment="0" attributes="0">
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="1" attributes="0">
+                          <Component id="lbl_name" min="-2" max="-2" attributes="0"/>
+                          <Component id="lbl_language" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                          <Component id="cb_language" max="32767" attributes="1"/>
+                          <Component id="txt_name" alignment="0" pref="164" max="32767" attributes="1"/>
+                      </Group>
+                  </Group>
               </Group>
-              <EmptySpace max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="1" max="-2" attributes="0">
-                  <Component id="txt_password2" alignment="0" max="32767" attributes="1"/>
-                  <Component id="txt_username" alignment="0" max="32767" attributes="1"/>
-                  <Component id="txt_password" alignment="0" pref="185" max="32767" attributes="1"/>
-              </Group>
-              <EmptySpace pref="65" max="32767" attributes="0"/>
+              <EmptySpace pref="15" max="32767" attributes="0"/>
           </Group>
           <Group type="102" alignment="1" attributes="0">
-              <EmptySpace pref="216" max="32767" attributes="0"/>
+              <EmptySpace pref="99" max="32767" attributes="0"/>
               <Component id="btn_create" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
               <Component id="btn_cancel" min="-2" max="-2" attributes="0"/>
@@ -51,26 +56,21 @@
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
-              <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
+              <Component id="lbl_header" min="-2" max="-2" attributes="0"/>
               <EmptySpace type="separate" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="txt_username" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="lbl_username" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="txt_name" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="lbl_name" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="lbl_password" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="txt_password" alignment="3" min="-2" max="-2" attributes="0"/>
-              </Group>
-              <EmptySpace max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="txt_password2" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="lbl_password2" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="cb_language" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="lbl_language" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace type="unrelated" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="btn_cancel" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="btn_create" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="btn_cancel" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace max="32767" attributes="0"/>
           </Group>
@@ -78,29 +78,31 @@
     </DimensionLayout>
   </Layout>
   <SubComponents>
-    <Component class="javax.swing.JLabel" name="jLabel1">
+    <Component class="javax.swing.JLabel" name="lbl_header">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-          <Font name="DejaVu Sans" size="18" style="0"/>
+          <Font name="Dialog" size="18" style="1"/>
         </Property>
-        <Property name="text" type="java.lang.String" value="Create User"/>
+        <Property name="text" type="java.lang.String" value="Create learn table"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JTextField" name="txt_username">
+    <Component class="javax.swing.JTextField" name="txt_name">
     </Component>
-    <Component class="javax.swing.JLabel" name="lbl_username">
+    <Component class="javax.swing.JComboBox" name="cb_language">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Username:"/>
+        <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
+          <StringArray count="0"/>
+        </Property>
       </Properties>
     </Component>
-    <Component class="javax.swing.JLabel" name="lbl_password">
+    <Component class="javax.swing.JLabel" name="lbl_name">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Password:"/>
+        <Property name="text" type="java.lang.String" value="Name:"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JLabel" name="lbl_password2">
+    <Component class="javax.swing.JLabel" name="lbl_language">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Repeat Password:"/>
+        <Property name="text" type="java.lang.String" value="Language:"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JButton" name="btn_create">
@@ -115,10 +117,6 @@
       <Properties>
         <Property name="text" type="java.lang.String" value="Cancel"/>
       </Properties>
-    </Component>
-    <Component class="javax.swing.JPasswordField" name="txt_password">
-    </Component>
-    <Component class="javax.swing.JPasswordField" name="txt_password2">
     </Component>
   </SubComponents>
 </Form>

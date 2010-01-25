@@ -12,13 +12,9 @@ public class Users extends Frame {
 
 	DBConnection connection;
 
-	public Users() {
+	public Users(DBConnection connection) {
 		initComponents();
-
-		String db_name = "test_db";
-		String db_user = "test";
-		String db_password = "test";
-		connection = new DBConnection(db_name, db_user, db_password);
+		this.connection = connection;
 	}
 
 	@SuppressWarnings("unchecked")
@@ -129,14 +125,6 @@ public class Users extends Frame {
 	    }
     }//GEN-LAST:event_btn_createActionPerformed
 
-	public static void main(String args[]) {
-		java.awt.EventQueue.invokeLater(new Runnable() {
-
-			public void run() {
-				new Users().setVisible(true);
-			}
-		});
-	}
         // Variables declaration - do not modify//GEN-BEGIN:variables
         private javax.swing.JButton btn_cancel;
         private javax.swing.JButton btn_create;
