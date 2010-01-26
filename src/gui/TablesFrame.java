@@ -9,11 +9,11 @@ import data.*;
 import helper.Helpers;
 import java.sql.ResultSet;
 
-public class Tables extends Frame {
+public class TablesFrame extends Frame {
 
 	DBConnection connection;
 
-	public Tables(DBConnection connection) {
+	public TablesFrame(DBConnection connection) {
 		initComponents();
 		this.connection = connection;
 
@@ -43,7 +43,7 @@ public class Tables extends Frame {
 
                 setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-                lbl_header.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+                lbl_header.setFont(new java.awt.Font("Dialog", 1, 18));
                 lbl_header.setText("Create learn table");
 
                 lbl_name.setText("Name:");

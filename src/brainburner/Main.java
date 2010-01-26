@@ -18,6 +18,6 @@ public class Main {
 		DBConnection connection = new DBConnection(db_name, db_user, db_password);
 
 		//new Users(connection); /* just for testing */
-		new Tables(connection); /* just for testing */
+		new TablesFrame(connection); /* just for testing */
 	}
 }

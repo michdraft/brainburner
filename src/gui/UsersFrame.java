@@ -8,11 +8,11 @@ package gui;
 import helper.*;
 import data.DBConnection;
 
-public class Users extends Frame {
+public class UsersFrame extends Frame {
 
 	DBConnection connection;
 
-	public Users(DBConnection connection) {
+	public UsersFrame(DBConnection connection) {
 		initComponents();
 		this.connection = connection;
 	}
@@ -33,7 +33,7 @@ public class Users extends Frame {
 
                 setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-                jLabel1.setFont(new java.awt.Font("DejaVu Sans", 0, 18)); // NOI18N
+                jLabel1.setFont(new java.awt.Font("DejaVu Sans", 0, 18));
                 jLabel1.setText("Create User");
 
                 lbl_username.setText("Username:");
@@ -58,20 +58,16 @@ public class Users extends Frame {
                         .addGroup(layout.createSequentialGroup()
                                 .addContainerGap()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                        .addGroup(layout.createSequentialGroup()
-                                                .addComponent(jLabel1)
-                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED))
-                                        .addGroup(layout.createSequentialGroup()
-                                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                                        .addComponent(lbl_password)
-                                                        .addComponent(lbl_username)
-                                                        .addComponent(lbl_password2))
-                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
+                                        .addComponent(jLabel1)
+                                        .addComponent(lbl_password)
+                                        .addComponent(lbl_username)
+                                        .addComponent(lbl_password2))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                                         .addComponent(txt_password2, javax.swing.GroupLayout.Alignment.LEADING)
                                         .addComponent(txt_username, javax.swing.GroupLayout.Alignment.LEADING)
                                         .addComponent(txt_password, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 185, Short.MAX_VALUE))
-                                .addContainerGap(12, Short.MAX_VALUE))
+                                .addContainerGap(65, Short.MAX_VALUE))
                         .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                                 .addContainerGap(216, Short.MAX_VALUE)
                                 .addComponent(btn_create)
