@@ -5,7 +5,8 @@
 
 package gui;
 
-import data.*;
+import data.objects.*;
+import data.DBConnection;
 import helper.Helpers;
 import java.sql.ResultSet;
 
@@ -112,13 +113,10 @@ public class TablesFrame extends Frame {
 		String name = txt_name.getText();
 		int id = ((Language)cb_language.getSelectedItem()).getId();
 
-		String query =
-			"insert into lang_table_rel(language, name) values (" +
-			id + ",'" + name +"')";
-
-		connection.updateDB(query);
-		Helpers.debug("Table '%s' with language '%s' successfully created!\n", name,
-			((Language)cb_language.getSelectedItem()).getName());
+		if (new LearnTable(id, name).createLearnTable(connection)) {
+			Helpers.debug("Table '%s' with language '%s' successfully created!\n", name,
+				((Language)cb_language.getSelectedItem()).getName());
+		}
 	}//GEN-LAST:event_btn_createActionPerformed
 
         // Variables declaration - do not modify//GEN-BEGIN:variables

@@ -1,15 +1,20 @@
 /*
- * LearnSet.java, package: data
+ * LearnSet.java, package: data.objects
  * Object class for the LearnSets (question/anwswer pairs)
  */
 
-package data;
+package data.objects;
 
 public class LearnSet {
 
 	private int id;
 	private String question;
 	private String answer;
+
+	public LearnSet(String question, String answer) {
+		this.question = question;
+		this.answer = answer;
+	}
 
 	/**
 	 * @return the id

@@ -1,14 +1,18 @@
 /*
- * Language.java, package: data
+ * Language.java, package: data.objects
  * This class capsulates the language data objects from the db.
  */
 
-package data;
+package data.objects;
 
 public class Language {
 
 	private int id;
 	private String name;
+
+	public Language(String name) {
+		this.name = name;
+	}
 
 	public Language(int id, String name) {
 		this.id = id;

@@ -6,6 +6,7 @@
 package gui;
 
 import helper.*;
+import data.objects.User;
 import data.DBConnection;
 
 public class UsersFrame extends Frame {
@@ -112,12 +113,16 @@ public class UsersFrame extends Frame {
 	    if (!Helpers.cmpPasswords(password, password2)) {
 		    Messages.showWarning("Passwords do not match!");
 	    } else {
+		    /*
 		    String query = "insert into users(username,password) values('"
 			    + username + "', '"
 			    + Helpers.stringToMD5(new String(password)) + "')";
 
 		    connection.updateDB(query);
-		    Messages.showInfo("User " + username + " succesfuly created!");
+		     */
+
+		    if (new User(username, new String(password)).update(connection))
+				Messages.showInfo("User " + username + " succesfuly created!");
 	    }
     }//GEN-LAST:event_btn_createActionPerformed
 
