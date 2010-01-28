@@ -6,8 +6,10 @@
 package gui;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
+import java.awt.Font;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -24,16 +26,19 @@ public class LoginFrame extends Frame {
 
 	public LoginFrame() {
 		lbl_header	= new JLabel("BrainBurner - Login");
+		lbl_header.setOpaque(true);
+		lbl_header.setBackground(Color.LIGHT_GRAY);
+		lbl_header.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 15));
 
 		lbl_username	= new JLabel("Username:");
 		lbl_username.setBounds(10, 20, 70, 25);
 		txt_username	= new JTextField();
-		txt_username.setBounds(110, 20, 125, 25);
+		txt_username.setBounds(90, 20, 125, 25);
 
 		lbl_password	= new JLabel("Password:");
 		lbl_password.setBounds(10, 50, 70, 25);
 		pwd_password	= new JPasswordField();
-		pwd_password.setBounds(110, 50, 125, 25);
+		pwd_password.setBounds(90, 50, 125, 25);
 
 		pnl_input	= new JPanel(null);
 		pnl_buttons	= new JPanel(new FlowLayout(FlowLayout.CENTER));
@@ -42,7 +47,7 @@ public class LoginFrame extends Frame {
 		btn_cancel	= new JButton("Cancel");
 
 		this.setLayout(new BorderLayout());
-		this.setMinimumSize(new Dimension(300, 200));
+		this.setMinimumSize(new Dimension(240, 180));
 
 		pnl_input.add(lbl_username);
 		pnl_input.add(txt_username);
