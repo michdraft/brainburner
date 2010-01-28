@@ -8,7 +8,7 @@ package data.objects;
 import data.DBConnection;
 import helper.Helpers;
 
-public class User {
+public class User implements DataObject {
 
 	private int id;
 	private String name;
@@ -16,7 +16,7 @@ public class User {
 
 	public User(String name, String password) {
 		this.name = name;
-		setPassword(password);
+		this.password = password;
 	}
 
 	/**
@@ -51,10 +51,14 @@ public class User {
 	 * @param password the password to set
 	 */
 	public void setPassword(String password) {
-		this.password = Helpers.stringToMD5(password);
+		this.password = password;
 	}
 
-	public boolean update(DBConnection connection) {
+	public void encryptPassword() {
+		this.password = Helpers.stringToMD5(this.password);
+	}
+
+	public boolean insert(DBConnection connection) {
 		String query_insert_user = 
 			"insert into users(username,password) values('"
 			    + this.name + "', '"
@@ -64,5 +68,13 @@ public class User {
 			return true;
 		else
 			return false;
+	}
+
+	public boolean update(DBConnection connection) {
+		throw new UnsupportedOperationException("Not supported yet.");
+	}
+
+	public boolean drop(DBConnection connection) {
+		throw new UnsupportedOperationException("Not supported yet.");
 	}
 }

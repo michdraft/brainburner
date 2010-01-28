@@ -5,11 +5,18 @@
 
 package gui;
 
+import data.DBConnection;
+import data.Users;
+import data.objects.User;
+import helper.Helpers;
+import helper.Messages;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -18,13 +25,17 @@ import javax.swing.JTextField;
 
 public class LoginFrame extends Frame {
 
+	private DBConnection connection;
+
 	private JLabel lbl_header, lbl_username, lbl_password;
 	private JTextField txt_username;
 	private JPasswordField pwd_password;
 	private JButton btn_ok, btn_cancel;
 	private JPanel pnl_input, pnl_buttons;
 
-	public LoginFrame() {
+	public LoginFrame(DBConnection connection) {
+		this.connection = connection;
+
 		lbl_header	= new JLabel("BrainBurner - Login");
 		lbl_header.setOpaque(true);
 		lbl_header.setBackground(Color.LIGHT_GRAY);
@@ -44,6 +55,12 @@ public class LoginFrame extends Frame {
 		pnl_buttons	= new JPanel(new FlowLayout(FlowLayout.CENTER));
 
 		btn_ok		= new JButton("Login");
+		btn_ok.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				checkUser();
+			}
+		});
+
 		btn_cancel	= new JButton("Cancel");
 
 		this.setLayout(new BorderLayout());
@@ -61,5 +78,25 @@ public class LoginFrame extends Frame {
 		this.add(pnl_input, BorderLayout.CENTER);
 		this.add(pnl_buttons, BorderLayout.SOUTH);
 		this.pack();
+	}
+
+	private void checkUser() {
+		String username = txt_username.getText();
+		String password = new String(pwd_password.getPassword());
+
+		User user = Users.getUser(connection, username);
+
+		if (user != null) {
+			if (Helpers.cmpPasswords(password, user.getPassword()))
+				login();
+			else
+				Messages.showError("Invalid password!");
+		} else {
+			Messages.showError("User " + username + " doesn't exist!");
+		}
+	}
+
+	private void login() {
+		Messages.showInfo("YO!");
 	}
 }

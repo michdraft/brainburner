@@ -75,4 +75,14 @@ public class Helpers {
 	public static boolean cmpPasswords(char[] password, char[] password2) {
 		return Arrays.equals(password, password2);
 	}
+
+	/**
+	 * Compares two strings to be indentical.
+	 * @param password_plain Given password as plain text
+	 * @param password_db Hashed password from database
+	 * @return True if both passwords are identical.
+	 */
+	public static boolean cmpPasswords(String password_plain, String password_db) {
+		return password_db.equals(stringToMD5(password_plain));
+	}
 }

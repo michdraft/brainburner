@@ -5,7 +5,9 @@
 
 package data.objects;
 
-public class Language {
+import data.DBConnection;
+
+public class Language implements DataObject {
 
 	private int id;
 	private String name;
@@ -43,5 +45,17 @@ public class Language {
 	@Override
 	public String toString() {
 		return this.name;
+	}
+
+	public boolean insert(DBConnection connection) {
+		throw new UnsupportedOperationException("Not supported yet.");
+	}
+
+	public boolean update(DBConnection connection) {
+		throw new UnsupportedOperationException("Not supported yet.");
+	}
+
+	public boolean drop(DBConnection connection) {
+		throw new UnsupportedOperationException("Not supported yet.");
 	}
 }

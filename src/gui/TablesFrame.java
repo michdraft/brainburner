@@ -113,7 +113,7 @@ public class TablesFrame extends Frame {
 		String name = txt_name.getText();
 		int id = ((Language)cb_language.getSelectedItem()).getId();
 
-		if (new LearnTable(id, name).createLearnTable(connection)) {
+		if (new LearnTable(id, name).insert(connection)) {
 			Helpers.debug("Table '%s' with language '%s' successfully created!\n", name,
 				((Language)cb_language.getSelectedItem()).getName());
 		}

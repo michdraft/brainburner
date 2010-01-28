@@ -7,7 +7,7 @@ package data.objects;
 
 import data.DBConnection;
 
-public class LearnTable {
+public class LearnTable implements DataObject {
 
 	private int id;
 	private int language;
@@ -53,7 +53,7 @@ public class LearnTable {
 		this.name = name;
 	}
 
-	public boolean createLearnTable(DBConnection connection) {
+	public boolean insert(DBConnection connection) {
 		String query_insert_table =
 			"insert into lang_table_rel(language, name) values (" +
 			this.language + ",'" + this.name +"')";
@@ -70,5 +70,13 @@ public class LearnTable {
 			return true;
 		else
 			return false;
+	}
+
+	public boolean update(DBConnection connection) {
+		throw new UnsupportedOperationException("Not supported yet.");
+	}
+
+	public boolean drop(DBConnection connection) {
+		throw new UnsupportedOperationException("Not supported yet.");
 	}
 }

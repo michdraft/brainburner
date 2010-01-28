@@ -5,7 +5,9 @@
 
 package data.objects;
 
-public class LearnSet {
+import data.DBConnection;
+
+public class LearnSet implements DataObject {
 
 	private int id;
 	private String question;
@@ -49,5 +51,17 @@ public class LearnSet {
 	 */
 	public void setAnswer(String answer) {
 		this.answer = answer;
+	}
+
+	public boolean insert(DBConnection connection) {
+		throw new UnsupportedOperationException("Not supported yet.");
+	}
+
+	public boolean update(DBConnection connection) {
+		throw new UnsupportedOperationException("Not supported yet.");
+	}
+
+	public boolean drop(DBConnection connection) {
+		throw new UnsupportedOperationException("Not supported yet.");
 	}
 }
