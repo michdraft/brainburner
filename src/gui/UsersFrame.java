@@ -1,7 +1,3 @@
-/*
- * Users.java, package: gui
- * Simple form to create users in the database.
- */
 package gui;
 
 import helper.*;
@@ -9,6 +5,10 @@ import data.objects.User;
 import data.DBConnection;
 import data.Users;
 
+/**
+ * Users.java, package: gui
+ * Simple form to create users in the database.
+ */
 public class UsersFrame extends Frame {
 
 	DBConnection connection;

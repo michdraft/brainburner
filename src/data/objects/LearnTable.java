@@ -1,12 +1,11 @@
-/*
- * LearnTable,java, package: data.objects
- * Data objects for the learn tables (as created in TablesFrame)
- */
-
 package data.objects;
 
 import data.DBConnection;
 
+/**
+ * LearnTable,java, package: data.objects
+ * Data objects for the learn tables (as created in TablesFrame)
+ */
 public class LearnTable implements DataObject {
 
 	private int id;

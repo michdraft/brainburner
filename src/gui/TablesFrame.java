@@ -1,8 +1,3 @@
-/*
- * Tables.java, package: gui
- * Trivial form to create Language-Usertable relations
- */
-
 package gui;
 
 import data.objects.*;
@@ -10,6 +5,10 @@ import data.DBConnection;
 import helper.Helpers;
 import java.sql.ResultSet;
 
+/**
+ * Tables.java, package: gui
+ * Trivial form to create Language-Usertable relations
+ */
 public class TablesFrame extends Frame {
 
 	DBConnection connection;

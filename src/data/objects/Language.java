@@ -1,12 +1,11 @@
-/*
- * Language.java, package: data.objects
- * This class capsulates the language data objects from the db.
- */
-
 package data.objects;
 
 import data.DBConnection;
 
+/**
+ * Language.java, package: data.objects
+ * This class capsulates the language data objects from the db.
+ */
 public class Language implements DataObject {
 
 	private int id;

@@ -1,13 +1,12 @@
-/*
- * User.java, package: data.objects
- * Object class for users.
- */
-
 package data.objects;
 
 import data.DBConnection;
 import helper.Helpers;
 
+/**
+ * User.java, package: data.objects
+ * Object class for users.
+ */
 public class User implements DataObject {
 
 	private int id;

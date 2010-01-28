@@ -1,13 +1,12 @@
-/*
- * Main.java, package: brainburner
- * Main class of the project. Won't do any magic.
- */
-
 package brainburner;
 
 import data.DBConnection;
 import gui.*;
 
+/**
+ * Main.java, package: brainburner
+ * Main class of the project. Won't do any magic.
+ */
 public class Main {
 	public static void main(String[] args) {
 

@@ -1,12 +1,11 @@
-/*
- * LearnSet.java, package: data.objects
- * Object class for the LearnSets (question/anwswer pairs)
- */
-
 package data.objects;
 
 import data.DBConnection;
 
+/**
+ * LearnSet.java, package: data.objects
+ * Object class for the LearnSets (question/anwswer pairs)
+ */
 public class LearnSet implements DataObject {
 
 	private int id;

@@ -1,10 +1,3 @@
-/*
- * Users.java, package: data
- * This class extends ArrayList and contains User-Objects.
- * It's used to load the users from the database and bring them in a
- * suitable form and also offers a method to get a single user by Name(getUser).
- */
-
 package data;
 
 import helper.Helpers;
@@ -12,6 +5,12 @@ import data.objects.User;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 
+/**
+ * Users.java, package: data
+ * This class extends ArrayList and contains User-Objects.
+ * It's used to load the users from the database and bring them in a
+ * suitable form and also offers a method to get a single user by Name(getUser).
+ */
 public class Users extends ArrayList<User> {
 
 	DBConnection connection;

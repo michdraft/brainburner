@@ -1,8 +1,3 @@
-/*
- * DBConnection.java, Package: data
- * Low-level implementation for the database connection.
- */
-
 package data;
 
 import java.sql.Connection;
@@ -12,6 +7,10 @@ import java.sql.ResultSet;
 
 import helper.Helpers;
 
+/**
+ * DBConnection.java, Package: data
+ * Low-level implementation for the database connection.
+ */
 public class DBConnection {
 
 	Connection database;

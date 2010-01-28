@@ -1,8 +1,3 @@
-/*
- * LoginFrame.java, package: gui
- * Testframe for a login window.
- */
-
 package gui;
 
 import data.DBConnection;
@@ -23,6 +18,10 @@ import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
+/**
+ * LoginFrame.java, package: gui
+ * Testframe for a login window.
+ */
 public class LoginFrame extends Frame {
 
 	private DBConnection connection;

@@ -1,8 +1,3 @@
-/*
- * Messages.java, Package: helper
- * Misc function like checking regexes, md5 hash creating, debug infos etc.
- */
-
 package helper;
 
 import java.util.regex.Matcher;
@@ -11,6 +6,10 @@ import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.Arrays;
 
+/**
+ * Messages.java, Package: helper
+ * Misc function like checking regexes, md5 hash creating, debug infos etc.
+ */
 public class Helpers {
 	private static final boolean debug = true;
 

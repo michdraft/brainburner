@@ -1,12 +1,11 @@
-/*
- * Messages.java, Package: helper
- * Several functions for displaying messages to the user.
- */
-
 package helper;
 
 import javax.swing.JOptionPane;
 
+/**
+ * Messages.java, Package: helper
+ * Several functions for displaying messages to the user.
+ */
 public class Messages {
 	/**
 	 * Shows an info dialog
