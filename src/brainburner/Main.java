@@ -18,6 +18,7 @@ public class Main {
 
 		//new UsersFrame(connection); /* just for testing */
 		//new TablesFrame(connection); /* just for testing */
-		new LoginFrame(connection); /* just for testing */
+		// new LoginFrame(connection); /* just for testing */
+		new MainFrame(); /* just for testing */
 	}
 }

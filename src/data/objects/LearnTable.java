@@ -1,20 +1,36 @@
 package data.objects;
 
 import data.DBConnection;
+import java.util.Vector;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
+import javax.swing.table.DefaultTableModel;
 
 /**
  * LearnTable,java, package: data.objects
  * Data objects for the learn tables (as created in TablesFrame)
  */
-public class LearnTable implements DataObject {
+public class LearnTable extends JScrollPane implements DataObject {
 
 	private int id;
 	private int language;
 	private String name;
+	private JTable tabelle = new JTable();
 
 	public LearnTable(int language, String name) {
 		this.language = language;
 		this.name = name;
+		
+	}
+
+	public LearnTable()
+	{
+		this.setViewportView(tabelle);
+		DefaultTableModel tableModel =
+			new DefaultTableModel(new String[]{"Name", "Sprache", "Anzahl Datensätze"}, 0);
+		tableModel.setRowCount(10);
+		tabelle.setModel(tableModel);
+		this.addLearnTable("Keywords", "Englisch", tableModel);
 	}
 
 	/**
@@ -50,6 +66,17 @@ public class LearnTable implements DataObject {
 	 */
 	public void setName(String name) {
 		this.name = name;
+	}
+
+	/*
+	 * This method add a new LearnTable row inside the Jtable DefaultTableModel
+	 * under construction!
+	 */
+	public void addLearnTable(String name, String Sprache, DefaultTableModel model)
+	{
+		int columnCount = model.getColumnCount();
+		Vector newDatas = new Vector(columnCount);
+		model.addRow(newDatas);
 	}
 
 	public boolean insert(DBConnection connection) {
