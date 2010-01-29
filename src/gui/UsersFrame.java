@@ -116,7 +116,7 @@ public class UsersFrame extends Frame {
 		    User user = new User(username, new String(password));
 		    user.encryptPassword();
 
-		    if (user.insert(connection)) {
+		    if (Users.addUser(connection, user)) {
 			    Messages.showInfo("User " + username + " succesfuly created!");
 		    }
 	    }

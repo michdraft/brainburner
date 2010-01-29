@@ -25,7 +25,6 @@ public class MainFrame extends Frame {
         borderLayoutCenter();
         borderLayoutSouth();
 
-        this.setVisible(true);
 
     }
 
