@@ -10,6 +10,7 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Font;
+import java.awt.Point;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JButton;
@@ -96,6 +97,7 @@ public class LoginFrame extends Frame {
 	}
 
 	private void login() {
-		Messages.showInfo("YO!");
+		new MainFrame();
+		this.setVisible(false);
 	}
 }
