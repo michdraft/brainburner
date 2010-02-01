@@ -12,7 +12,6 @@ import java.util.ArrayList;
  * suitable form and also offers a method to get a single user by Name(getUser).
  */
 public class Users {
-
 	public static boolean addUser(DBConnection connection, User user) {
 		String query = String.format("insert into users(username,password) values('%s', '%s')",
 			user.getName(), user.getPassword());

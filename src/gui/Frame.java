@@ -1,10 +1,11 @@
 package gui;
 
- import com.sun.java.swing.plaf.gtk.GTKLookAndFeel;
+import com.sun.java.swing.plaf.gtk.GTKLookAndFeel;
 import javax.swing.JFrame;
- import javax.swing.UIManager;
+import javax.swing.UIManager;
 
- import helper.*;
+import helper.*;
+import java.awt.Point;
 
 /**
  * Frame.java, package: gui
@@ -24,6 +25,7 @@ public class Frame extends JFrame {
 				+ e.getMessage());
 		}
 
+		this.setLocationRelativeTo(null); /* FIXME: Dirty, not really working hack */
 		this.setVisible(true);
 	}
 }

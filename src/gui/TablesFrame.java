@@ -2,6 +2,7 @@ package gui;
 
 import data.objects.*;
 import data.DBConnection;
+import data.LearnTables;
 import helper.Helpers;
 import java.sql.ResultSet;
 
@@ -110,11 +111,12 @@ public class TablesFrame extends Frame {
 
 	private void btn_createActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_createActionPerformed
 		String name = txt_name.getText();
-		int id = ((Language)cb_language.getSelectedItem()).getId();
+		int language_id = ((Language)cb_language.getSelectedItem()).getId();
+		String language_str = ((Language)cb_language.getSelectedItem()).getName();
 
-		if (new LearnTable(id, name).insert(connection)) {
-			Helpers.debug("Table '%s' with language '%s' successfully created!\n", name,
-				((Language)cb_language.getSelectedItem()).getName());
+		LearnTable learn_table = new LearnTable(language_id, name);
+		if (LearnTables.addLearnTable(connection, learn_table)) {
+			Helpers.debug("Table '%s' with language '%s' successfully created!\n", name, language_str);
 		}
 	}//GEN-LAST:event_btn_createActionPerformed
 

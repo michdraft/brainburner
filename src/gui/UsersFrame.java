@@ -118,18 +118,9 @@ public class UsersFrame extends Frame {
 
 		    if (Users.addUser(connection, user)) {
 			    Messages.showInfo("User " + username + " succesfuly created!");
+			    this.setVisible(false);
 		    }
 	    }
-
-	    /*
-	    Users users = new Users(connection);
-	    for (User u : users)
-	    Helpers.debug("%s - %s\n", u.getName(), u.getPassword());
-	     */
-
-	    User u = Users.getUser(connection, "hans");
-	    Helpers.debug("%s - %s\n", u.getName(), u.getPassword());
-
     }//GEN-LAST:event_btn_createActionPerformed
         // Variables declaration - do not modify//GEN-BEGIN:variables
         private javax.swing.JButton btn_cancel;

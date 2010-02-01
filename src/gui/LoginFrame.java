@@ -30,7 +30,7 @@ public class LoginFrame extends Frame {
 	private JLabel lbl_header, lbl_username, lbl_password;
 	private JTextField txt_username;
 	private JPasswordField pwd_password;
-	private JButton btn_ok, btn_cancel;
+	private JButton btn_ok, btn_cancel, btn_new_user;
 	private JPanel pnl_input, pnl_buttons;
 
 	public LoginFrame(DBConnection connection) {
@@ -52,7 +52,7 @@ public class LoginFrame extends Frame {
 		pwd_password.setBounds(90, 50, 125, 25);
 
 		pnl_input	= new JPanel(null);
-		pnl_buttons	= new JPanel(new FlowLayout(FlowLayout.CENTER));
+		pnl_buttons	= new JPanel(new FlowLayout(FlowLayout.RIGHT));
 
 		btn_ok		= new JButton("Login");
 		btn_ok.addActionListener(new ActionListener() {
@@ -62,6 +62,18 @@ public class LoginFrame extends Frame {
 		});
 
 		btn_cancel	= new JButton("Cancel");
+		btn_cancel.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				System.exit(0);
+			}
+		});
+
+		btn_new_user	= new JButton("New User");
+		btn_new_user.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				newUser();
+			}
+		});
 
 		this.setLayout(new BorderLayout());
 		this.setMinimumSize(new Dimension(240, 180));
@@ -73,6 +85,7 @@ public class LoginFrame extends Frame {
 
 		pnl_buttons.add(btn_ok);
 		pnl_buttons.add(btn_cancel);
+		pnl_buttons.add(btn_new_user);
 
 		this.add(lbl_header, BorderLayout.NORTH);
 		this.add(pnl_input, BorderLayout.CENTER);
@@ -96,8 +109,12 @@ public class LoginFrame extends Frame {
 		}
 	}
 
+	private void newUser() {
+		new UsersFrame(connection);
+	}
+
 	private void login() {
-		new MainFrame();
+		new MainFrame(connection);
 		this.setVisible(false);
 	}
 }
