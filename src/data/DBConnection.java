@@ -5,7 +5,7 @@ import java.sql.DriverManager;
 import java.sql.Statement;
 import java.sql.ResultSet;
 
-import helper.Helpers;
+import helper.*;
 
 /**
  * DBConnection.java, Package: data
@@ -26,6 +26,8 @@ public class DBConnection {
 			statement = database.createStatement();
 		} catch (Exception e) {
 			Helpers.debug("Error: %s\n", e.getMessage());
+			Messages.showError("Could not connect to database!");
+			System.exit(1);
 		}
 	}
 

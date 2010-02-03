@@ -11,7 +11,7 @@ import java.util.ArrayList;
  * It's used to load the users from the database and bring them in a
  * suitable form and also offers a method to get a single user by Name(getUser).
  */
-public class Users {
+public class Users extends ArrayList<User> {
 	public static boolean addUser(DBConnection connection, User user) {
 		String query = String.format("insert into users(username,password) values('%s', '%s')",
 			user.getName(), user.getPassword());
@@ -22,11 +22,11 @@ public class Users {
 			return false;
 	}
 
-	public static ArrayList<User> getAllUsers(DBConnection connection) {
+	public static Users getAllUsers(DBConnection connection) {
 		String query = "select * from users";
 
 		ResultSet result_set = connection.queryDB(query);
-		ArrayList<User> users = new ArrayList<User>();
+		Users users = new Users();
 
 		try {
 			while (result_set.next()) {

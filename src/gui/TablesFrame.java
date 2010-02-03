@@ -2,9 +2,9 @@ package gui;
 
 import data.objects.*;
 import data.DBConnection;
+import data.Languages;
 import data.LearnTables;
 import helper.Helpers;
-import java.sql.ResultSet;
 
 /**
  * Tables.java, package: gui
@@ -16,17 +16,12 @@ public class TablesFrame extends Frame {
 
 	public TablesFrame(DBConnection connection) {
 		initComponents();
+
 		this.connection = connection;
 
-		String query =
-			"select * from languages";
-		ResultSet result_set = connection.queryDB(query);
-		try {
-			while (result_set.next()) {
-				cb_language.addItem(new Language(result_set.getInt("ID"), result_set.getString("NAME")));
-			}
-		} catch (Exception e) {
-			Helpers.debug("Connection: Error: %s\n", e.getMessage());
+		Languages languages = Languages.getAllLanguages(connection);
+		for (Language l : languages) {
+			cb_language.addItem(l);
 		}
 	}
 
@@ -114,8 +109,8 @@ public class TablesFrame extends Frame {
 		int language_id = ((Language)cb_language.getSelectedItem()).getId();
 		String language_str = ((Language)cb_language.getSelectedItem()).getName();
 
-		LearnTable learn_table = new LearnTable(language_id, name);
-		if (LearnTables.addLearnTable(connection, learn_table)) {
+		LearnTable learntable = new LearnTable(language_id, name);
+		if (LearnTables.addLearnTable(connection, learntable)) {
 			Helpers.debug("Table '%s' with language '%s' successfully created!\n", name, language_str);
 		}
 	}//GEN-LAST:event_btn_createActionPerformed
