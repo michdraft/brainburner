@@ -3,6 +3,7 @@ package data;
 import helper.Helpers;
 import data.objects.User;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 
 /**
@@ -29,7 +30,8 @@ public class Users extends ArrayList<User> {
 			while (result_set.next()) {
 				this.add(
 					new User(result_set.getString("USERNAME"),
-						 result_set.getString("PASSWORD")));
+						 result_set.getString("PASSWORD"),
+						 result_set.getInt("ID")));
 			}
 		} catch (Exception e) {
 			Helpers.debug("getAllUsers: Error: %s\n", e.getMessage());
@@ -44,7 +46,8 @@ public class Users extends ArrayList<User> {
 		try {
 			if (result_set.next()) {
 				return new User(result_set.getString("USERNAME"),
-						result_set.getString("PASSWORD"));
+						result_set.getString("PASSWORD"),
+						result_set.getInt("ID"));
 			} else {
 				return null;
 			}
@@ -53,4 +56,12 @@ public class Users extends ArrayList<User> {
 			return null;
 		}
 	}
+
+	public static User getUsername(DBConnection connection, String user)
+	{
+		String query = String.format("select username from users where username'%s'", user);
+		ResultSet result_set = connection.queryDB(query);
+		return (User) result_set;
+	}
+	
 }

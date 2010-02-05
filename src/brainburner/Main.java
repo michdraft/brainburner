@@ -16,9 +16,6 @@ public class Main {
 
 		DBConnection connection = new DBConnection(db_name, db_user, db_password);
 
-		//new UsersFrame(connection); /* just for testing */
-		//new TablesFrame(connection); /* just for testing */
-		// new LoginFrame(connection); /* just for testing */
-		new MainFrame(); /* just for testing */
+		new LoginFrame(connection); /* just for testing */
 	}
 }

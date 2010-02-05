@@ -1,10 +1,13 @@
 package helper;
 
+import java.awt.Dimension;
+import java.awt.Toolkit;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.Arrays;
+import javax.swing.JFrame;
 
 /**
  * Messages.java, Package: helper
@@ -84,4 +87,23 @@ public class Helpers {
 	public static boolean cmpPasswords(String password_plain, String password_db) {
 		return password_db.equals(stringToMD5(password_plain));
 	}
+
+	/*
+	 * This method placed the Frame in the middle of the screen
+	 */
+	public static void centerWindow(JFrame window) {
+		Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+		Dimension frameSize = window.getSize();
+
+		if(frameSize.height > screenSize.height)
+			frameSize.height = screenSize.height;
+
+		if(frameSize.width > screenSize.width)
+			frameSize.width = screenSize.width;
+
+		window.setLocation((screenSize.width - frameSize.width)/ 2,
+				 (screenSize.height - frameSize.height)/2);
+
+	}
+
 }

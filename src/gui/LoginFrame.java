@@ -12,6 +12,8 @@ import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -26,13 +28,13 @@ public class LoginFrame extends Frame {
 
 	private DBConnection connection;
 
-	private JLabel lbl_header, lbl_username, lbl_password;
+	private JLabel lbl_header, lbl_username, lbl_password, lbl_register;
 	private JTextField txt_username;
 	private JPasswordField pwd_password;
 	private JButton btn_ok, btn_cancel;
 	private JPanel pnl_input, pnl_buttons;
 
-	public LoginFrame(DBConnection connection) {
+	public LoginFrame(final DBConnection connection) {
 		this.connection = connection;
 
 		lbl_header	= new JLabel("BrainBurner - Login");
@@ -50,6 +52,16 @@ public class LoginFrame extends Frame {
 		pwd_password	= new JPasswordField();
 		pwd_password.setBounds(90, 50, 125, 25);
 
+		lbl_register    = new JLabel("register");
+		lbl_register.setForeground(Color.blue);
+		lbl_register.setBounds(168, 75, 70, 25);
+		lbl_register.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				showRegisterWindow();
+			}
+		});
+
 		pnl_input	= new JPanel(null);
 		pnl_buttons	= new JPanel(new FlowLayout(FlowLayout.CENTER));
 
@@ -61,14 +73,20 @@ public class LoginFrame extends Frame {
 		});
 
 		btn_cancel	= new JButton("Cancel");
+		btn_cancel.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				removeLoginMask();
+			}
+		});
 
 		this.setLayout(new BorderLayout());
-		this.setMinimumSize(new Dimension(240, 180));
+		this.setMinimumSize(new Dimension(240, 190));
 
 		pnl_input.add(lbl_username);
 		pnl_input.add(txt_username);
 		pnl_input.add(lbl_password);
 		pnl_input.add(pwd_password);
+		pnl_input.add(lbl_register);
 
 		pnl_buttons.add(btn_ok);
 		pnl_buttons.add(btn_cancel);
@@ -76,26 +94,56 @@ public class LoginFrame extends Frame {
 		this.add(lbl_header, BorderLayout.NORTH);
 		this.add(pnl_input, BorderLayout.CENTER);
 		this.add(pnl_buttons, BorderLayout.SOUTH);
+
+		Helpers.centerWindow(this);
 		this.pack();
+		this.setVisible(true);
 	}
 
 	private void checkUser() {
 		String username = txt_username.getText();
 		String password = new String(pwd_password.getPassword());
 
-		User user = Users.getUser(connection, username);
+		User user = Users.getUser(this.connection, username);
 
 		if (user != null) {
-			if (Helpers.cmpPasswords(password, user.getPassword()))
-				login();
-			else
+			if (Helpers.cmpPasswords(password, user.getPassword())) {
+				this.login();
+				this.hideLoginFrame();
+				new MainFrame(connection, username.trim(), this);
+			} else {
 				Messages.showError("Invalid password!");
+			}
 		} else {
 			Messages.showError("User " + username + " doesn't exist!");
 		}
+	}	
+
+	private void showRegisterWindow()
+	{
+		new UsersFrame(this.connection, this); this.hideLoginFrame();
 	}
 
-	private void login() {
-		Messages.showInfo("YO!");
+	/*
+	 * This method clears the input and password field
+	 */
+	public void removeLoginMask() {
+		txt_username.setText(""); pwd_password.setText("");
 	}
+
+	public void fillLoginMask(String name, String password) {
+		txt_username.setText(name); pwd_password.setText(password);
+	}
+
+	private void login() { Messages.showInfo("Login successful!"); }
+
+	/*
+	 * This method hides the Frame
+	 */
+	public void hideLoginFrame() { this.setVisible(false); }
+
+	/*
+	 * This method shows the Frame
+	 */
+	public void showLoginFrame() { this.setVisible(true); }
 }

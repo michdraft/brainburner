@@ -12,19 +12,14 @@ public class User implements DataObject {
 	private int id;
 	private String name;
 	private String password;
+	private DBConnection connection;
 
-	public User(String name, String password) {
+	public User(String name, String password, int id) {
 		this.name = name;
 		this.password = password;
+		this.id = id;
 	}
-
-	/**
-	 * @return the id
-	 */
-	public int getId() {
-		return id;
-	}
-
+	
 	/**
 	 * @return the name
 	 */
@@ -45,6 +40,13 @@ public class User implements DataObject {
 	public String getPassword() {
 		return password;
 	}
+
+	/**
+	 * @return the id
+	 */
+	public int getId() {
+		return id;
+	}	
 
 	/**
 	 * @param password the password to set
@@ -76,4 +78,5 @@ public class User implements DataObject {
 	public boolean drop(DBConnection connection) {
 		throw new UnsupportedOperationException("Not supported yet.");
 	}
+	
 }

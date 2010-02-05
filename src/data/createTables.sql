@@ -1,3 +1,17 @@
+-- Table exercisearea
+create table exercisearea (
+	id int primary key not null generated always as identity,
+	areaname varchar(150)
+);
+
+-- Table pool
+create table pool (
+	id int primary key not null generated always as identity,
+	exerciseareaid int references exercisearea(id),
+	question varchar(200),
+	answer varchar(200)
+);
+
 -- Table users
 create table users (
 	id int primary key not null generated always as identity,
@@ -5,36 +19,22 @@ create table users (
 	password varchar(32) not null
 );
 
--- Table statistic
-create table statistic (
+-- Table user-table-relations
+create table user_table_rel (
 	id int primary key not null generated always as identity,
-	result int,
+	exerciseareaid int references exercisearea(id),
 	userid int references users(id)
 );
 
 -- Table languages
 create table languages (
 	id int primary key not null generated always as identity,
-	name varchar(50)
-);
-
--- Table user-table-relations
-create table user_table_rel (
-	id int primary key not null generated always as identity,
-	learntable int,
-	userid int references users(id)
+	name varchar(75)
 );
 
 -- Table lang-table-relations
 create table lang_table_rel (
 	id int primary key not null generated always as identity,
-	language int references languages(id),
-	name varchar(50)
-);
-
--- Template for user-tables
-create table example_table (
-	id int primary key not null generated always as identity,
-	question varchar(100),
-	answer varchar(100)
+	languageid int references languages(id),
+	exerciseareaid int references exercisearea(id)
 );
