@@ -54,18 +54,21 @@ public class TablesFrame extends Frame {
                 });
 
                 btn_cancel.setText("Cancel");
+                btn_cancel.addActionListener(new java.awt.event.ActionListener() {
+                        public void actionPerformed(java.awt.event.ActionEvent evt) {
+                                btn_cancelActionPerformed(evt);
+                        }
+                });
 
                 javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
                 getContentPane().setLayout(layout);
                 layout.setHorizontalGroup(
                         layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addGroup(layout.createSequentialGroup()
+                                .addContainerGap()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(lbl_header)
                                         .addGroup(layout.createSequentialGroup()
-                                                .addContainerGap()
-                                                .addComponent(lbl_header))
-                                        .addGroup(layout.createSequentialGroup()
-                                                .addContainerGap()
                                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                                         .addComponent(lbl_name)
                                                         .addComponent(lbl_language))
@@ -73,9 +76,9 @@ public class TablesFrame extends Frame {
                                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                                         .addComponent(cb_language, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                                         .addComponent(txt_name, javax.swing.GroupLayout.DEFAULT_SIZE, 164, Short.MAX_VALUE))))
-                                .addContainerGap(15, Short.MAX_VALUE))
+                                .addContainerGap(24, Short.MAX_VALUE))
                         .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addContainerGap(99, Short.MAX_VALUE)
+                                .addContainerGap(151, Short.MAX_VALUE)
                                 .addComponent(btn_create)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(btn_cancel)
@@ -114,6 +117,10 @@ public class TablesFrame extends Frame {
 			Helpers.debug("Table '%s' with language '%s' successfully created!\n", name, language_str);
 		}
 	}//GEN-LAST:event_btn_createActionPerformed
+
+	private void btn_cancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_cancelActionPerformed
+		this.toggleVisibility();
+	}//GEN-LAST:event_btn_cancelActionPerformed
 
         // Variables declaration - do not modify//GEN-BEGIN:variables
         private javax.swing.JButton btn_cancel;

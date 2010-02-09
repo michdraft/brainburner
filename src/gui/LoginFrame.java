@@ -10,7 +10,6 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Font;
-import java.awt.Point;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JButton;
@@ -26,6 +25,8 @@ import javax.swing.JTextField;
 public class LoginFrame extends Frame {
 
 	private DBConnection connection;
+	private UsersFrame users_frame;
+	private MainFrame main_frame;
 
 	private JLabel lbl_header, lbl_username, lbl_password;
 	private JTextField txt_username;
@@ -35,6 +36,8 @@ public class LoginFrame extends Frame {
 
 	public LoginFrame(DBConnection connection) {
 		this.connection = connection;
+		this.users_frame = new UsersFrame(connection);
+		this.main_frame = new MainFrame(connection);
 
 		lbl_header	= new JLabel("BrainBurner - Login");
 		lbl_header.setOpaque(true);
@@ -90,6 +93,7 @@ public class LoginFrame extends Frame {
 		this.add(lbl_header, BorderLayout.NORTH);
 		this.add(pnl_input, BorderLayout.CENTER);
 		this.add(pnl_buttons, BorderLayout.SOUTH);
+		//this.centerFrame();
 		this.pack();
 	}
 
@@ -110,11 +114,11 @@ public class LoginFrame extends Frame {
 	}
 
 	private void newUser() {
-		new UsersFrame(connection);
+		users_frame.toggleVisibility();
 	}
 
 	private void login() {
-		new MainFrame(connection);
-		this.setVisible(false);
+		main_frame.toggleVisibility();
+		this.toggleVisibility();
 	}
 }

@@ -5,7 +5,8 @@ import javax.swing.JFrame;
 import javax.swing.UIManager;
 
 import helper.*;
-import java.awt.Point;
+import java.awt.Dimension;
+import java.awt.Toolkit;
 
 /**
  * Frame.java, package: gui
@@ -24,8 +25,26 @@ public class Frame extends JFrame {
 			Messages.showWarning("Error while setting LookAndFeel:\n"
 				+ e.getMessage());
 		}
+	}
 
-		this.setLocationRelativeTo(null); /* FIXME: Dirty, not really working hack */
-		this.setVisible(true);
+	@Override
+	public void pack() {
+		super.pack();
+		this.centerFrame();
+	}
+
+	public void centerFrame() {
+		Dimension dimension_frame = this.getSize();
+		Dimension dimension_screen = Toolkit.getDefaultToolkit().getScreenSize();
+		int x = (dimension_screen.width - dimension_frame.width) / 2;
+		int y = (dimension_screen.height - dimension_frame.height) / 2;
+		this.setLocation(x, y);
+	}
+
+	public void toggleVisibility() {
+		if (this.isVisible())
+			this.setVisible(false);
+		else
+			this.setVisible(true);
 	}
 }

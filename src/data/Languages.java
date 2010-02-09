@@ -24,8 +24,8 @@ public class Languages extends ArrayList<Language> {
 
 		try {
 			while (result_set.next()) {
-				languages.add(new Language(result_set.getInt("ID"),
-							   result_set.getString("NAME")));
+				languages.add(new Language(result_set.getString("NAME"),
+							   result_set.getInt("ID")));
 			}
 
 			return languages;
@@ -42,7 +42,8 @@ public class Languages extends ArrayList<Language> {
 
 		try {
 			if (result_set.next()) {
-				return new Language(result_set.getString("NAME"));
+				return new Language(result_set.getString("NAME"),
+						    result_set.getInt("ID"));
 			} else {
 				return null;
 			}

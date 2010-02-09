@@ -1,12 +1,10 @@
 package data.objects;
 
-import data.DBConnection;
-
 /**
  * Language.java, package: data.objects
  * This class capsulates the language data objects from the db.
  */
-public class Language implements DataObject {
+public class Language {
 
 	private int id;
 	private String name;
@@ -15,7 +13,7 @@ public class Language implements DataObject {
 		this.name = name;
 	}
 
-	public Language(int id, String name) {
+	public Language(String name, int id) {
 		this.id = id;
 		this.name = name;
 	}
@@ -44,17 +42,5 @@ public class Language implements DataObject {
 	@Override
 	public String toString() {
 		return this.name;
-	}
-
-	public boolean insert(DBConnection connection) {
-		throw new UnsupportedOperationException("Not supported yet.");
-	}
-
-	public boolean update(DBConnection connection) {
-		throw new UnsupportedOperationException("Not supported yet.");
-	}
-
-	public boolean drop(DBConnection connection) {
-		throw new UnsupportedOperationException("Not supported yet.");
 	}
 }

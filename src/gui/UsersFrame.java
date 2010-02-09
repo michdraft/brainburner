@@ -51,6 +51,11 @@ public class UsersFrame extends Frame {
                 });
 
                 btn_cancel.setText("Cancel");
+                btn_cancel.addActionListener(new java.awt.event.ActionListener() {
+                        public void actionPerformed(java.awt.event.ActionEvent evt) {
+                                btn_cancelActionPerformed(evt);
+                        }
+                });
 
                 javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
                 getContentPane().setLayout(layout);
@@ -68,9 +73,9 @@ public class UsersFrame extends Frame {
                                         .addComponent(txt_password2, javax.swing.GroupLayout.Alignment.LEADING)
                                         .addComponent(txt_username, javax.swing.GroupLayout.Alignment.LEADING)
                                         .addComponent(txt_password, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 185, Short.MAX_VALUE))
-                                .addContainerGap(65, Short.MAX_VALUE))
+                                .addContainerGap(75, Short.MAX_VALUE))
                         .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addContainerGap(216, Short.MAX_VALUE)
+                                .addContainerGap(269, Short.MAX_VALUE)
                                 .addComponent(btn_create)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(btn_cancel)
@@ -122,6 +127,11 @@ public class UsersFrame extends Frame {
 		    }
 	    }
     }//GEN-LAST:event_btn_createActionPerformed
+
+    private void btn_cancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_cancelActionPerformed
+	    this.toggleVisibility();
+    }//GEN-LAST:event_btn_cancelActionPerformed
+
         // Variables declaration - do not modify//GEN-BEGIN:variables
         private javax.swing.JButton btn_cancel;
         private javax.swing.JButton btn_create;

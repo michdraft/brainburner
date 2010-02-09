@@ -17,11 +17,12 @@ import javax.swing.ImageIcon;
 import javax.swing.JToolBar;
 
 public class MainFrame extends Frame {
-
 	DBConnection connection;
+	TablesFrame tables_frame;
 
 	public MainFrame(DBConnection connection) {
 		this.connection = connection;
+		tables_frame = new TablesFrame(connection);
 
 		this.setMinimumSize(new Dimension(800, 600));
 		this.setTitle("BrainBurner");
@@ -31,8 +32,6 @@ public class MainFrame extends Frame {
 		borderLayoutNorth();
 		borderLayoutCenter();
 		borderLayoutSouth();
-
-
 	}
 
 	private void borderLayoutNorth() {
@@ -122,6 +121,6 @@ public class MainFrame extends Frame {
 	}
 
 	private void addTable() {
-		new TablesFrame(connection);
+		tables_frame.toggleVisibility();
 	}
 }

@@ -15,7 +15,7 @@ public class Main {
 		String db_password = "test";
 
 		DBConnection connection = new DBConnection(db_name, db_user, db_password);
-		new LoginFrame(connection);
+		new LoginFrame(connection).toggleVisibility();
 		//new LanguageFrame(connection);
 	}
 }

@@ -10,7 +10,7 @@ import javax.swing.table.DefaultTableModel;
  * LearnTable,java, package: data.objects
  * Data objects for the learn tables (as created in TablesFrame)
  */
-public class LearnTable extends JScrollPane implements DataObject {
+public class LearnTable extends JScrollPane {
 
 	private int id;
 	private int language;

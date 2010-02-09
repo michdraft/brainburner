@@ -36,7 +36,7 @@
                   <Component id="txt_username" alignment="0" max="32767" attributes="1"/>
                   <Component id="txt_password" alignment="0" pref="185" max="32767" attributes="1"/>
               </Group>
-              <EmptySpace pref="65" max="32767" attributes="0"/>
+              <EmptySpace pref="75" max="32767" attributes="0"/>
           </Group>
           <Group type="102" alignment="1" attributes="0">
               <EmptySpace pref="269" max="32767" attributes="0"/>
@@ -115,6 +115,9 @@
       <Properties>
         <Property name="text" type="java.lang.String" value="Cancel"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btn_cancelActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JPasswordField" name="txt_password">
     </Component>

@@ -32,7 +32,8 @@ public class Users extends ArrayList<User> {
 			while (result_set.next()) {
 				users.add(
 					new User(result_set.getString("USERNAME"),
-						 result_set.getString("PASSWORD")));
+						 result_set.getString("PASSWORD"),
+						 result_set.getInt("ID")));
 			}
 
 			return users;
@@ -50,7 +51,8 @@ public class Users extends ArrayList<User> {
 		try {
 			if (result_set.next()) {
 				return new User(result_set.getString("USERNAME"),
-						result_set.getString("PASSWORD"));
+						result_set.getString("PASSWORD"),
+						result_set.getInt("ID"));
 			} else {
 				return null;
 			}
