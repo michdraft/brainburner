@@ -1,136 +1,127 @@
 package gui;
 
 import data.DBConnection;
-import data.objects.UserTable;
-import helper.Helpers;
-import helper.Messages;
+import data.objects.LearnTable;
+import data.objects.User;
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
-import java.awt.event.MouseEvent;
+import javax.swing.JPanel;
 import javax.swing.JLabel;
-import javax.swing.JButton;
 import java.awt.Dimension;
-import java.awt.event.ActionListener;
-import java.awt.event.MouseAdapter;
+import javax.swing.AbstractAction;
+import javax.swing.Action;
 import javax.swing.Box;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
+import javax.swing.JToolBar;
 
 public class MainFrame extends Frame {
+	DBConnection connection;
+	User current_user;
+	TablesFrame tables_frame;
+	JPanel southPanel;
+	JLabel currentUser;
 
-    String username;
-    LoginFrame loginFrame;
-    DBConnection connection;
+	public MainFrame(DBConnection connection, User current_user) {
+		this.connection = connection;
+		this.current_user = current_user;
+		tables_frame = new TablesFrame(connection);
 
-    public MainFrame(DBConnection connection, String username, 
-	    LoginFrame lframe) {
+		this.setMinimumSize(new Dimension(800, 600));
+		this.setTitle("BrainBurner");
+		this.setLocationRelativeTo(null);
+		this.setLayout(new BorderLayout());
 
-	this.connection = connection;
-	this.username = username;
-	this.loginFrame = lframe;
+		borderLayoutNorth();
+		borderLayoutCenter();
+		borderLayoutSouth();
+	}
 
-        this.setMinimumSize(new Dimension(800, 600));
-        this.setTitle("BrainBurner");
-        this.setLayout(new BorderLayout());
-	Helpers.centerWindow(this);
+	private void borderLayoutNorth() {
+		Box northPanel = Box.createVerticalBox();
+		Box firstRow = Box.createHorizontalBox();
+		Box secondRow = Box.createHorizontalBox();
 
-        borderLayoutNorth();
-        borderLayoutCenter();
-        borderLayoutSouth();
+		Icon icon = new ImageIcon("data/pics/freebsd-devil.png");
+		JLabel headline = new JLabel("BrainBurner - Multiuser Lernsoftware", icon, JLabel.LEFT);
+		headline.setIconTextGap(20);
+		firstRow.add(headline);
+		firstRow.add(Box.createHorizontalGlue());
+		firstRow.setOpaque(true);
+		firstRow.setBackground(Color.LIGHT_GRAY);
 
-        this.setVisible(true);
+		northPanel.add(firstRow);
 
-    }
+		JToolBar toolbar = new JToolBar();
+		final Icon icon_newlist = new ImageIcon("data/icons/add.png");
+		final Icon icon_statistic = new ImageIcon("data/icons/medal_gold_2.png");
+		final Icon icon_help = new ImageIcon("data/icons/help.png");
 
-    public void borderLayoutNorth() {
+		Action act_newTable = new AbstractAction() {
+			{
+				putValue(Action.NAME, "New List");
+				putValue(Action.SMALL_ICON, icon_newlist);
+			}
 
-        Box northPanel = Box.createVerticalBox();
-        Box firstRow = Box.createHorizontalBox();
-        Box secondRow = Box.createHorizontalBox();
+			public void actionPerformed(ActionEvent e) {
+				addTable();
+			}
+		};
 
-        Icon icon = new ImageIcon("data/pics/freebsd-devil.png");
-        JLabel headline = new JLabel("BrainBurner - Multiuser Lernsoftware", icon, JLabel.LEFT);
-        headline.setIconTextGap(20);
-        firstRow.add(headline);
-        firstRow.add(Box.createHorizontalGlue());
+		Action act_statistic = new AbstractAction() {
+			{
+				putValue(Action.NAME, "Statistic");
+				putValue(Action.SMALL_ICON, icon_statistic);
+			}
 
-	northPanel.add(Box.createVerticalStrut(5));
-        northPanel.add(firstRow);
-	northPanel.add(Box.createVerticalStrut(5));
+			public void actionPerformed(ActionEvent e) {
+				throw new UnsupportedOperationException("Not supported yet.");
+			}
+		};
 
-        /* Create Navigation Buttons */
-        JButton newTable = new JButton("+ New List");
-	newTable.addActionListener(new ActionListener() {
-		public void actionPerformed(ActionEvent e) {
-			new ExerciseTableFrame(connection, username);
-		}
-	});
-        JButton statistic = new JButton("Statistik");
-        JButton help = new JButton("Help");
+		Action act_help = new AbstractAction() {
+			{
+				putValue(Action.NAME, "Help");
+				putValue(Action.SMALL_ICON, icon_help);
+			}
 
-        /* Add Navigation Buttons */
-        secondRow.add(newTable);
-        secondRow.add(statistic);
-        secondRow.add(help);
+			public void actionPerformed(ActionEvent e) {
+				throw new UnsupportedOperationException("Not supported yet.");
+			}
+		};
 
-        /* Add Gap behind the Navigation Buttons */
-        secondRow.add(Box.createHorizontalGlue());
-	secondRow.setOpaque(true);
-	secondRow.setBackground(Color.GRAY);
-        northPanel.add(secondRow);
-	
-	northPanel.setOpaque(true);
-	northPanel.setBackground(Color.LIGHT_GRAY);
-        this.add(northPanel, BorderLayout.NORTH);
-    }
+		toolbar.add(act_newTable);
+		toolbar.add(act_statistic);
+		toolbar.add(act_help);
 
-    public void borderLayoutCenter() {
-	Box horizontal = Box.createHorizontalBox();
-	Box center = Box.createVerticalBox();
-	horizontal.add(Box.createHorizontalStrut(5));
-	center.add(Box.createVerticalStrut(5));
-	center.add(new UserTable(this.connection));
-	center.add(Box.createVerticalStrut(5));
-	horizontal.add(center);
-	horizontal.add(Box.createHorizontalStrut(5));
-        this.add(horizontal, BorderLayout.CENTER);
-    }
+		secondRow.add(toolbar);
 
-    public void borderLayoutSouth() {
-	Box vert = Box.createVerticalBox();
-	Box user = Box.createHorizontalBox();
-        JLabel currentUser = new JLabel("current user: "+ this.username);
-	JLabel logout = new JLabel("logout");
-	logout.setForeground(Color.red);
-	logout.addMouseListener(new MouseAdapter() {
-			@Override
-		public void mouseClicked(MouseEvent e) {
-			logout();
-		}
-	});
+		/* Add Gap behind the Navigation Buttons */
+		secondRow.add(Box.createHorizontalGlue());
+		secondRow.setOpaque(true);
+		secondRow.setBackground(Color.GRAY);
+		northPanel.add(secondRow);
 
-	user.add(Box.createHorizontalStrut(3));
-	user.add(currentUser);
-	user.add(Box.createHorizontalGlue());
-	user.add(logout);
-	user.add(Box.createHorizontalStrut(2));
+		this.add(northPanel, BorderLayout.NORTH);
+	}
 
-	vert.setOpaque(true);
-	vert.setBackground(Color.LIGHT_GRAY);
-	vert.add(Box.createVerticalStrut(5));
-	vert.add(user);
-	vert.add(Box.createVerticalStrut(5));
-	
-        this.add(vert, BorderLayout.SOUTH);
-    }
+	private void borderLayoutCenter() {
+		JPanel panel = new JPanel();
+		panel.add(new LearnTable());
+		this.add(panel, BorderLayout.CENTER);
+	}
 
-    public void logout()
-    {
-	this.setVisible(false);
-	this.loginFrame.showLoginFrame();
-	this.loginFrame.removeLoginMask();
-	Messages.showInfo("Logout successful!");
-    }    	
-    
+	private void borderLayoutSouth() {
+		southPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
+		currentUser = new JLabel("Logged in as: " + current_user.getName());
+		southPanel.add(currentUser, BorderLayout.SOUTH);
+		southPanel.setBackground(Color.LIGHT_GRAY);
+		this.add(southPanel, BorderLayout.SOUTH);
+	}
+
+	private void addTable() {
+		tables_frame.toggleVisibility();
+	}
 }

@@ -27,15 +27,18 @@ import javax.swing.JTextField;
 public class LoginFrame extends Frame {
 
 	private DBConnection connection;
+	private UsersFrame users_frame;
+	private MainFrame main_frame;
 
 	private JLabel lbl_header, lbl_username, lbl_password, lbl_register;
 	private JTextField txt_username;
 	private JPasswordField pwd_password;
-	private JButton btn_ok, btn_cancel;
+	private JButton btn_ok, btn_cancel, btn_new_user;
 	private JPanel pnl_input, pnl_buttons;
 
 	public LoginFrame(final DBConnection connection) {
 		this.connection = connection;
+		this.users_frame = new UsersFrame(connection);
 
 		lbl_header	= new JLabel("BrainBurner - Login");
 		lbl_header.setOpaque(true);
@@ -63,7 +66,7 @@ public class LoginFrame extends Frame {
 		});
 
 		pnl_input	= new JPanel(null);
-		pnl_buttons	= new JPanel(new FlowLayout(FlowLayout.CENTER));
+		pnl_buttons	= new JPanel(new FlowLayout(FlowLayout.RIGHT));
 
 		btn_ok		= new JButton("Login");
 		btn_ok.addActionListener(new ActionListener() {
@@ -75,7 +78,14 @@ public class LoginFrame extends Frame {
 		btn_cancel	= new JButton("Cancel");
 		btn_cancel.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				removeLoginMask();
+				System.exit(0);
+			}
+		});
+
+		btn_new_user	= new JButton("New User");
+		btn_new_user.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				newUser();
 			}
 		});
 
@@ -90,6 +100,7 @@ public class LoginFrame extends Frame {
 
 		pnl_buttons.add(btn_ok);
 		pnl_buttons.add(btn_cancel);
+		pnl_buttons.add(btn_new_user);
 
 		this.add(lbl_header, BorderLayout.NORTH);
 		this.add(pnl_input, BorderLayout.CENTER);
@@ -97,7 +108,6 @@ public class LoginFrame extends Frame {
 
 		Helpers.centerWindow(this);
 		this.pack();
-		this.setVisible(true);
 	}
 
 	private void checkUser() {
@@ -108,9 +118,7 @@ public class LoginFrame extends Frame {
 
 		if (user != null) {
 			if (Helpers.cmpPasswords(password, user.getPassword())) {
-				this.login();
-				this.hideLoginFrame();
-				new MainFrame(connection, username.trim(), this);
+				this.login(user);
 			} else {
 				Messages.showError("Invalid password!");
 			}
@@ -119,9 +127,8 @@ public class LoginFrame extends Frame {
 		}
 	}	
 
-	private void showRegisterWindow()
-	{
-		new UsersFrame(this.connection, this); this.hideLoginFrame();
+	private void showRegisterWindow() {
+		new UsersFrame(connection).toggleVisibility();
 	}
 
 	/*
@@ -135,15 +142,13 @@ public class LoginFrame extends Frame {
 		txt_username.setText(name); pwd_password.setText(password);
 	}
 
-	private void login() { Messages.showInfo("Login successful!"); }
+	private void newUser() {
+		users_frame.toggleVisibility();
+	}
 
-	/*
-	 * This method hides the Frame
-	 */
-	public void hideLoginFrame() { this.setVisible(false); }
-
-	/*
-	 * This method shows the Frame
-	 */
-	public void showLoginFrame() { this.setVisible(true); }
+	private void login(User user) {
+		main_frame = new MainFrame(connection, user);
+		main_frame.toggleVisibility();
+		this.toggleVisibility();
+	}
 }

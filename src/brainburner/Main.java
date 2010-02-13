@@ -16,6 +16,6 @@ public class Main {
 
 		DBConnection connection = new DBConnection(db_name, db_user, db_password);
 
-		new LoginFrame(connection); /* just for testing */
+		new LoginFrame(connection).toggleVisibility();
 	}
 }

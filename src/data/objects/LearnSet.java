@@ -6,7 +6,7 @@ import data.DBConnection;
  * LearnSet.java, package: data.objects
  * Object class for the LearnSets (question/anwswer pairs)
  */
-public class LearnSet implements DataObject {
+public class LearnSet {
 
 	private int id;
 	private String question;
