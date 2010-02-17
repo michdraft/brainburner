@@ -1,6 +1,5 @@
 package gui;
 
-//import com.sun.java.swing.plaf.gtk.GTKLookAndFeel;
 import javax.swing.JFrame;
 //import javax.swing.UIManager;
 

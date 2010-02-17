@@ -60,5 +60,5 @@ public class Users extends ArrayList<User> {
 			Helpers.debug("getUser: Error: %s\n", e.getMessage());
 			return null;
 		}
-	}	
+	}
 }

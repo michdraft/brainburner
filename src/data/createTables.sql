@@ -29,7 +29,11 @@ create table user_table_rel (
 -- Table languages
 create table languages (
 	id int primary key not null generated always as identity,
+<<<<<<< HEAD
 	languagename varchar(75)
+=======
+	name varchar(75)
+>>>>>>> 86fb77cd47954c0f83c042cb36771d4a71ef38ed
 );
 
 -- Table lang-table-relations
