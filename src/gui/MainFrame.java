@@ -28,7 +28,7 @@ public class MainFrame extends Frame {
 	public MainFrame(DBConnection connection, User current_user, String username) {
 		this.connection = connection;
 		this.current_user = current_user;
-		this.username = username;
+		this.username = current_user.getName();
 		tables_frame = new ExerciseAreaFrame(connection, username);
 
 		this.setMinimumSize(new Dimension(800, 600));
@@ -111,7 +111,7 @@ public class MainFrame extends Frame {
 
 	private void borderLayoutCenter() {
 		JPanel panel = new JPanel();
-		panel.add(new OverviewTable());
+		panel.add(new OverviewTable(connection, this.username));
 		this.add(panel, BorderLayout.CENTER);
 	}
 
