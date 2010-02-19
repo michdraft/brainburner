@@ -87,23 +87,4 @@ public class Helpers {
 	public static boolean cmpPasswords(String password_plain, String password_db) {
 		return password_db.equals(stringToMD5(password_plain));
 	}
-
-	/*
-	 * This method placed the Frame in the middle of the screen
-	 */
-	public static void centerWindow(JFrame window) {
-		Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
-		Dimension frameSize = window.getSize();
-
-		if(frameSize.height > screenSize.height)
-			frameSize.height = screenSize.height;
-
-		if(frameSize.width > screenSize.width)
-			frameSize.width = screenSize.width;
-
-		window.setLocation((screenSize.width - frameSize.width)/ 2,
-				 (screenSize.height - frameSize.height)/2);
-
-	}
-
 }
