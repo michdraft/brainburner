@@ -1,13 +1,10 @@
 package helper;
 
-import java.awt.Dimension;
-import java.awt.Toolkit;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.Arrays;
-import javax.swing.JFrame;
 
 /**
  * Messages.java, Package: helper
