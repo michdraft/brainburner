@@ -1,8 +1,6 @@
 package gui;
 
 import javax.swing.JFrame;
-//import javax.swing.UIManager;
-
 import helper.*;
 import java.awt.Dimension;
 import java.awt.Toolkit;

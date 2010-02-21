@@ -21,14 +21,20 @@ public class OverviewTable extends JScrollPane {
 	private DBConnection connection;
 	private String username;
 	private JTable tabelle = new JTable();
+	private DefaultTableModel tableModel;
 
 	public OverviewTable(DBConnection connection, String user)
 	{
 		this.connection = connection;
 		this.username = user;
 		this.setViewportView(tabelle);
-		DefaultTableModel tableModel =
-			new DefaultTableModel(new String[]{"Name", "Sprache", "Anzahl Datensätze"}, 0);
+		tableModel = new DefaultTableModel(new String[]{"Name", "Sprache", "Anzahl Datensätze"}, 0);
+		tabelle.setModel(tableModel);
+		this.insert(connection, tableModel);
+	}
+
+	public void refresh() {
+		tableModel = new DefaultTableModel(new String[]{"Name", "Sprache", "Anzahl Datensätze"}, 0);
 		tabelle.setModel(tableModel);
 		this.insert(connection, tableModel);
 	}
@@ -111,13 +117,5 @@ public class OverviewTable extends JScrollPane {
 			}
 		}
 		return arrayList;
-	}
-
-	public boolean update(DBConnection connection) {
-		throw new UnsupportedOperationException("Not supported yet.");
-	}
-
-	public boolean drop(DBConnection connection) {
-		throw new UnsupportedOperationException("Not supported yet.");
 	}
 }

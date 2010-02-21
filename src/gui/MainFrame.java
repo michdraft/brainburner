@@ -24,12 +24,14 @@ public class MainFrame extends Frame {
 	JPanel southPanel;
 	JLabel currentUser;
 	String username;
+	OverviewTable overview_table;
 
 	public MainFrame(DBConnection connection, User current_user, String username) {
 		this.connection = connection;
 		this.current_user = current_user;
 		this.username = current_user.getName();
-		tables_frame = new ExerciseAreaFrame(connection, username);
+		tables_frame = new ExerciseAreaFrame(connection, this, username);
+		overview_table = new OverviewTable(connection, this.username);
 
 		this.setMinimumSize(new Dimension(800, 600));
 		this.setTitle("BrainBurner");
@@ -111,7 +113,7 @@ public class MainFrame extends Frame {
 
 	private void borderLayoutCenter() {
 		JPanel panel = new JPanel();
-		panel.add(new OverviewTable(connection, this.username));
+		panel.add(overview_table);
 		this.add(panel, BorderLayout.CENTER);
 	}
 
@@ -123,7 +125,12 @@ public class MainFrame extends Frame {
 		this.add(southPanel, BorderLayout.SOUTH);
 	}
 
+	public void refresh() {
+		overview_table.refresh();
+	}
+
 	private void addTable() {
 		tables_frame.toggleVisibility();
+		refresh();
 	}
 }

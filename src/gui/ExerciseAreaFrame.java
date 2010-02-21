@@ -14,11 +14,13 @@ import helper.Messages;
 public class ExerciseAreaFrame extends Frame {
 
 	DBConnection connection;
+	MainFrame parent;
 	String username;
 
-	public ExerciseAreaFrame(DBConnection connection, String username) {
+	public ExerciseAreaFrame(DBConnection connection, MainFrame parent, String username) {
 		initComponents();
 
+		this.parent = parent;
 		this.connection = connection;
 		this.username = username;
 
@@ -136,6 +138,12 @@ public class ExerciseAreaFrame extends Frame {
 		for (Language l : languages) {
 			cb_language.addItem(l);
 		}
+	}
+
+	@Override
+	public void toggleVisibility() {
+		parent.refresh();
+		super.toggleVisibility();
 	}
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btn_cancel;
