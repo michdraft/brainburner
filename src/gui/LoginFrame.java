@@ -98,6 +98,7 @@ public class LoginFrame extends Frame {
 		this.add(pnl_input, BorderLayout.CENTER);
 		this.add(pnl_buttons, BorderLayout.SOUTH);
 
+		this.getRootPane().setDefaultButton(btn_ok);
 		this.pack();
 	}
 
