@@ -7,7 +7,7 @@ create table exercisearea (
 -- Table pool
 create table pool (
 	id int primary key not null generated always as identity,
-	exerciseareaid int references exercisearea(id),
+	exerciseareaid int references exercisearea(id) on delete cascade,
 	question varchar(200),
 	answer varchar(200)
 );
@@ -22,7 +22,7 @@ create table users (
 -- Table user-table-relations
 create table user_table_rel (
 	id int primary key not null generated always as identity,
-	exerciseareaid int references exercisearea(id),
+	exerciseareaid int references exercisearea(id) on delete cascade,
 	userid int references users(id)
 );
 
@@ -36,5 +36,5 @@ create table languages (
 create table lang_table_rel (
 	id int primary key not null generated always as identity,
 	languageid int references languages(id),
-	exerciseareaid int references exercisearea(id)
+	exerciseareaid int references exercisearea(id) on delete cascade
 );

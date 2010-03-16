@@ -11,17 +11,12 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
-
-/**
- * LearnTable,java, package: data.objects
- * Data objects for the learn tables (as created in TablesFrame)
- */
 public class OverviewTable extends JScrollPane {
 
 	private DBConnection connection;
 	private String username;
 	private JTable tabelle = new JTable();
-	private DefaultTableModel tableModel;
+	private DefaultTableModel tableModel;	
 
 	public OverviewTable(DBConnection connection, String user)
 	{
