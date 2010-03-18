@@ -21,6 +21,8 @@ public class MainFrame extends Frame {
 	DBConnection connection;
 	User current_user;
 	ExerciseAreaFrame tables_frame;
+	DelExerciseAreaFrame del_tables_frame;
+	EditExerciseAreaFrame edit_table_frame;
 	JPanel southPanel;
 	JLabel currentUser;
 	String username;
@@ -31,6 +33,8 @@ public class MainFrame extends Frame {
 		this.current_user = current_user;
 		this.username = current_user.getName();
 		tables_frame = new ExerciseAreaFrame(connection, this, username);
+		del_tables_frame = new DelExerciseAreaFrame(connection, this, username);
+		edit_table_frame = new EditExerciseAreaFrame(connection, username);
 		overview_table = new OverviewTable(connection, this.username);
 
 		this.setMinimumSize(new Dimension(800, 600));
@@ -54,12 +58,15 @@ public class MainFrame extends Frame {
 		firstRow.add(headline);
 		firstRow.add(Box.createHorizontalGlue());
 		firstRow.setOpaque(true);
-		firstRow.setBackground(Color.LIGHT_GRAY);
+		firstRow.setBackground(Color.lightGray);
 
 		northPanel.add(firstRow);
 
 		JToolBar toolbar = new JToolBar();
 		final Icon icon_newlist = new ImageIcon("data/icons/add.png");
+		final Icon icon_edit = new ImageIcon("data/icons/edit.png");
+		final Icon icon_delete = new ImageIcon("data/icons/delete.png");
+		final Icon icon_exercise = new ImageIcon("data/icons/exercise.png");
 		final Icon icon_statistic = new ImageIcon("data/icons/medal_gold_2.png");
 		final Icon icon_help = new ImageIcon("data/icons/help.png");
 
@@ -70,7 +77,40 @@ public class MainFrame extends Frame {
 			}
 
 			public void actionPerformed(ActionEvent e) {
-				addTable();
+				addExerciseArea();
+			}
+		};
+
+		Action act_edit = new AbstractAction() {
+			{
+				putValue(Action.NAME, "Edit List");
+				putValue(Action.SMALL_ICON, icon_edit);
+			}
+
+			public void actionPerformed(ActionEvent e) {
+				editExerciseArea();
+			}
+		};
+
+		Action act_delTable = new AbstractAction() {
+			{
+				putValue(Action.NAME, "Delete List");
+				putValue(Action.SMALL_ICON, icon_delete);
+			}
+
+			public void actionPerformed(ActionEvent e) {
+				deleteExerciseArea();
+			}
+		};
+
+		Action act_exercise = new AbstractAction() {
+			{
+				putValue(Action.NAME, "Exercise List");
+				putValue(Action.SMALL_ICON, icon_exercise);
+			}
+
+			public void actionPerformed(ActionEvent e) {
+				throw new UnsupportedOperationException("Not supported yet.");
 			}
 		};
 
@@ -95,24 +135,25 @@ public class MainFrame extends Frame {
 				throw new UnsupportedOperationException("Not supported yet.");
 			}
 		};
-
+	
 		toolbar.add(act_newTable);
+		toolbar.add(act_edit);
+		toolbar.add(act_delTable);
+		toolbar.add(act_exercise);
 		toolbar.add(act_statistic);
 		toolbar.add(act_help);
+		toolbar.setFloatable(false);
+		toolbar.add(Box.createHorizontalGlue());
 
 		secondRow.add(toolbar);
-
-		/* Add Gap behind the Navigation Buttons */
-		secondRow.add(Box.createHorizontalGlue());
-		secondRow.setOpaque(true);
-		secondRow.setBackground(Color.GRAY);
+		
 		northPanel.add(secondRow);
-
 		this.add(northPanel, BorderLayout.NORTH);
 	}
 
 	private void borderLayoutCenter() {
 		JPanel panel = new JPanel();
+		overview_table.setBackground(Color.LIGHT_GRAY);
 		panel.add(overview_table);
 		this.add(panel, BorderLayout.CENTER);
 	}
@@ -129,8 +170,18 @@ public class MainFrame extends Frame {
 		overview_table.refresh();
 	}
 
-	private void addTable() {
+	private void addExerciseArea() {
 		tables_frame.toggleVisibility();
 		refresh();
+	}
+
+	private void deleteExerciseArea() {
+		del_tables_frame.toggleVisibility();
+		del_tables_frame.refreshCbExerciseArea();
+	}
+
+	private void editExerciseArea() {
+		edit_table_frame.toggleVisibility();
+		edit_table_frame.refreshCbExerciseArea();
 	}
 }
