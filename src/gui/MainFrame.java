@@ -29,6 +29,7 @@ public class MainFrame extends Frame {
 	OverviewTable overview_table;
 
 	public MainFrame(DBConnection connection, User current_user, String username) {
+		this.setDefaultCloseOperation(EXIT_ON_CLOSE);
 		this.connection = connection;
 		this.current_user = current_user;
 		this.username = current_user.getName();

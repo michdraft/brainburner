@@ -37,6 +37,7 @@ public class LoginFrame extends Frame {
 	private JPanel pnl_input, pnl_buttons;
 
 	public LoginFrame(final DBConnection connection) {
+		this.setDefaultCloseOperation(EXIT_ON_CLOSE);
 		this.connection = connection;
 		this.users_frame = new UsersFrame(connection);
 

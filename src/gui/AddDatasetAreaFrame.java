@@ -29,7 +29,7 @@ public class AddDatasetAreaFrame extends Frame {
                 txt_answer = new javax.swing.JTextField();
                 lbl_question1 = new javax.swing.JLabel();
 
-                setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+                setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
                 lbl_header.setFont(new java.awt.Font("Dialog", 1, 18));
                 lbl_header.setText("Add new Dataset");

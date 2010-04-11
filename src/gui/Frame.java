@@ -11,7 +11,7 @@ import java.awt.Toolkit;
  */
 public class Frame extends JFrame {
 	public Frame() {
-		this.setDefaultCloseOperation(EXIT_ON_CLOSE);
+		this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 
 		/*
 		 * Get the system style und try to use it for the frames.

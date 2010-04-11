@@ -32,7 +32,7 @@ public class UsersFrame extends Frame {
                 txt_password = new javax.swing.JPasswordField();
                 txt_password2 = new javax.swing.JPasswordField();
 
-                setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+                setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
                 jLabel1.setFont(new java.awt.Font("DejaVu Sans", 0, 18));
                 jLabel1.setText("Create User");
@@ -75,7 +75,7 @@ public class UsersFrame extends Frame {
                                         .addComponent(txt_password, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 185, Short.MAX_VALUE))
                                 .addContainerGap(75, Short.MAX_VALUE))
                         .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addContainerGap(269, Short.MAX_VALUE)
+                                .addContainerGap(271, Short.MAX_VALUE)
                                 .addComponent(btn_create)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(btn_cancel)
