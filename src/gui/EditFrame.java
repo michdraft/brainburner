@@ -19,10 +19,12 @@ public class EditFrame extends Frame {
 	private DBConnection connection;
 	private String areaname;
 	private OverviewExTable overview;
+	private AddDatasetAreaFrame addDatasetAreaFrame;
 
 	public EditFrame(DBConnection connection, String areaname) {
 		this.connection = connection;
 		this.areaname = areaname;
+		addDatasetAreaFrame = new AddDatasetAreaFrame(connection, this, areaname);
 		overview = new OverviewExTable(connection, areaname);
 		
 		this.setMinimumSize(new Dimension(800, 600));
@@ -61,7 +63,7 @@ public class EditFrame extends Frame {
 			}
 
 			public void actionPerformed(ActionEvent e) {
-				new AddDatasetAreaFrame(connection, areaname);
+				addDatasetAreaFrame.toggleVisibility();
 			}
 		};
 
@@ -72,5 +74,9 @@ public class EditFrame extends Frame {
 
 		north.add(secondRow);
 		this.add(north, BorderLayout.NORTH);
+	}
+
+	public void refresh() {
+		overview.refresh();
 	}
 }

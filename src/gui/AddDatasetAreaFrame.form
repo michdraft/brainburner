@@ -28,7 +28,7 @@
                   <Component id="lbl_header" min="-2" max="-2" attributes="0"/>
                   <Group type="102" alignment="0" attributes="0">
                       <Component id="lbl_question" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace pref="11" max="32767" attributes="0"/>
+                      <EmptySpace max="32767" attributes="0"/>
                       <Component id="txt_question" min="-2" pref="161" max="-2" attributes="0"/>
                   </Group>
                   <Group type="102" alignment="1" attributes="0">
@@ -37,7 +37,7 @@
                       <Component id="btn_cancel" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <Group type="102" alignment="1" attributes="0">
-                      <Component id="lbl_question1" pref="48" max="32767" attributes="0"/>
+                      <Component id="lbl_question1" pref="62" max="32767" attributes="0"/>
                       <EmptySpace min="-2" pref="10" max="-2" attributes="0"/>
                       <Component id="txt_answer" min="-2" pref="161" max="-2" attributes="0"/>
                   </Group>

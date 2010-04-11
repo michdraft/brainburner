@@ -22,16 +22,7 @@ public class OverviewExTable extends JScrollPane {
 		this.connection = connection;
 		this.areaname = areaname;
 
-		tableModel = new DefaultTableModel();
-		tableModel.setDataVector(this.insert(connection, tableModel, areaname),
-					 new Object[]{"Question", "Answer", "Edit", "Delete"});
-		tabelle.setModel(tableModel);
-		tabelle.getColumn("Question").setMinWidth(300);
-		tabelle.getColumn("Answer").setMinWidth(300);
-		tabelle.getColumn("Edit").setCellRenderer(new ButtonRenderer());
-		tabelle.getColumn("Edit").setCellEditor(new ButtonEditor(new JCheckBox(), connection));
-		tabelle.getColumn("Delete").setCellRenderer(new ButtonRenderer());
-		tabelle.getColumn("Delete").setCellEditor(new ButtonEditor(new JCheckBox(), connection));
+		refresh();
 		this.setViewportView(tabelle);
 		setVisible(true);
 
@@ -69,5 +60,18 @@ public class OverviewExTable extends JScrollPane {
 			}
 		}
 		return object;
+	}
+
+	public void refresh() {
+		tableModel = new DefaultTableModel();
+		tableModel.setDataVector(this.insert(connection, tableModel, areaname),
+					 new Object[]{"Question", "Answer", "Edit", "Delete"});
+		tabelle.setModel(tableModel);
+		tabelle.getColumn("Question").setMinWidth(300);
+		tabelle.getColumn("Answer").setMinWidth(300);
+		tabelle.getColumn("Edit").setCellRenderer(new ButtonRenderer());
+		tabelle.getColumn("Edit").setCellEditor(new ButtonEditor(new JCheckBox(), connection));
+		tabelle.getColumn("Delete").setCellRenderer(new ButtonRenderer());
+		tabelle.getColumn("Delete").setCellEditor(new ButtonEditor(new JCheckBox(), connection));
 	}
 }
