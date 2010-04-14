@@ -59,7 +59,7 @@ public class EditFrame extends Frame {
 		Action act_addDataset = new AbstractAction() {
 			{
 				putValue(Action.NAME, "Add Dataset");
-				putValue(Action.SMALL_ICON, icon_add);
+				putValue(Action.SMALL_ICON, icon_add);			
 			}
 
 			public void actionPerformed(ActionEvent e) {

@@ -23,6 +23,7 @@ public class MainFrame extends Frame {
 	ExerciseAreaFrame tables_frame;
 	DelExerciseAreaFrame del_tables_frame;
 	EditExerciseAreaFrame edit_table_frame;
+	TrainExerciseAreaFrame train_table_frame;
 	JPanel southPanel;
 	JLabel currentUser;
 	String username;
@@ -36,6 +37,7 @@ public class MainFrame extends Frame {
 		tables_frame = new ExerciseAreaFrame(connection, this, username);
 		del_tables_frame = new DelExerciseAreaFrame(connection, this, username);
 		edit_table_frame = new EditExerciseAreaFrame(connection, username);
+		train_table_frame = new TrainExerciseAreaFrame(connection, username);
 		overview_table = new OverviewTable(connection, this.username);
 
 		this.setMinimumSize(new Dimension(800, 600));
@@ -111,7 +113,7 @@ public class MainFrame extends Frame {
 			}
 
 			public void actionPerformed(ActionEvent e) {
-				throw new UnsupportedOperationException("Not supported yet.");
+				trainExerciseArea();
 			}
 		};
 
@@ -184,5 +186,10 @@ public class MainFrame extends Frame {
 	private void editExerciseArea() {
 		edit_table_frame.toggleVisibility();
 		edit_table_frame.refreshCbExerciseArea();
+	}
+
+	private void trainExerciseArea() {
+		train_table_frame.toggleVisibility();
+		train_table_frame.refreshCbExerciseArea();
 	}
 }
