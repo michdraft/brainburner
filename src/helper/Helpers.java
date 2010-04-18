@@ -84,4 +84,13 @@ public class Helpers {
 	public static boolean cmpPasswords(String password_plain, String password_db) {
 		return password_db.equals(stringToMD5(password_plain));
 	}
+
+	/**
+	 * Returns a random number with max as maximum value
+	 * @param max maximum value
+	 * @return
+	 */
+	public static int random(int max) {
+		return (int)(Math.random() * max);
+	}
 }

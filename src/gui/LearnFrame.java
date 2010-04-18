@@ -1,5 +1,6 @@
 package gui;
 
+import helper.Helpers;
 import helper.Messages;
 import java.util.ArrayList;
 
@@ -88,19 +89,19 @@ public class LearnFrame extends Frame {
     }// </editor-fold>//GEN-END:initComponents
 
 	private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-		if(this.counter < this.datasets.size()) {
-			if(this.checkIfAnswerIsEmpty()) {
-				this.counter++;
-				if(this.counter != this.datasets.size())
-				{
-					txt_question.setText(this.datasets.get(this.counter)[0]);
-					txt_answer.setText("");
-				} else {
-					// Übung fertig! Statistik anzeigen!
-				}
+		int idx = Helpers.random(this.datasets.size());
+
+		if(this.checkIfAnswerIsEmpty()) {
+			this.counter++;
+			if(this.counter != this.datasets.size()) {
+				txt_question.setText(this.datasets.get(idx)[0]);
+				txt_answer.setText("");
+				this.datasets.remove(idx);
 			} else {
-				Messages.showInfo("Don't forget entering an answer!");
+				Helpers.debug("Finish!");
 			}
+		} else {
+			Messages.showInfo("Don't forget entering an answer!");
 		}
 	}//GEN-LAST:event_jButton1ActionPerformed
 	@Override
