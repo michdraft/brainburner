@@ -2,10 +2,13 @@ package gui;
 
 import data.DBConnection;
 import data.objects.OverviewExTable;
+import helper.Messages;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import javax.swing.AbstractAction;
 import javax.swing.Action;
 import javax.swing.Box;
@@ -36,6 +39,13 @@ public class EditFrame extends Frame {
 
 		this.north();
 		this.add(overview, BorderLayout.CENTER);
+
+
+		this.addWindowListener(new WindowAdapter() {
+			public void windowClosing(WindowEvent e) {
+				toggleVisibility();
+			}
+		});
 	}
 
 	private void north() {
@@ -69,19 +79,7 @@ public class EditFrame extends Frame {
 			}
 		};
 
-		Action act_closeWindow = new AbstractAction() {
-			{
-				putValue(Action.NAME, "Close window");
-//				putValue(Action.SMALL_ICON, icon_add);
-			}
-
-			public void actionPerformed(ActionEvent e) {
-				toggleVisibility();
-			}
-		};
-
 		toolbar.add(act_addDataset);
-		toolbar.add(act_closeWindow);
 		secondRow.add(toolbar);
 		toolbar.setFloatable(false);
 		toolbar.add(Box.createHorizontalGlue());

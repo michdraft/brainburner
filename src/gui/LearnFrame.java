@@ -1,17 +1,19 @@
 package gui;
 
 import helper.Helpers;
+import helper.Messages;
 import java.util.ArrayList;
 
 public class LearnFrame extends Frame {
 
 	private ArrayList<String[]> datasets;
+	private int idx;
 	
 	public LearnFrame(ArrayList<String[]> datasets) {
 		initComponents();
 
 		this.datasets = datasets;
-
+		this.idx = 0;
 		this.askQuestion();
 	}
 
@@ -86,6 +88,7 @@ public class LearnFrame extends Frame {
     }// </editor-fold>//GEN-END:initComponents
 
 	private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+		checkAnswer(this.txt_answer.getText().trim());
 		askQuestion();
 	}//GEN-LAST:event_jButton1ActionPerformed
 	@Override
@@ -102,13 +105,22 @@ public class LearnFrame extends Frame {
 	}
 
 	private void askQuestion() {
-		int idx = Helpers.random(this.datasets.size());
+		idx = Helpers.random(this.datasets.size());
 		if(!this.datasets.isEmpty()) {
 			txt_question.setText(this.datasets.get(idx)[0]);
 			txt_answer.setText("");
-			this.datasets.remove(idx);
 		} else {
 			this.toggleVisibility();
+		}
+	}
+
+	private void checkAnswer(String answer) {
+		if (this.datasets.get(idx)[1].equals(answer)) {
+			Messages.showInfo("correct answer");
+			this.datasets.remove(idx);
+		} else {
+			Messages.showInfo("wrong answer");
+			this.datasets.remove(idx);
 		}
 	}
 
