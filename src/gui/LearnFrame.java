@@ -1,21 +1,18 @@
 package gui;
 
 import helper.Helpers;
-import helper.Messages;
 import java.util.ArrayList;
 
 public class LearnFrame extends Frame {
 
 	private ArrayList<String[]> datasets;
-	private int counter;
 	
 	public LearnFrame(ArrayList<String[]> datasets) {
 		initComponents();
 
 		this.datasets = datasets;
-		this.counter = 0;
 
-		this.showFirstQuestion();
+		this.askQuestion();
 	}
 
 
@@ -89,28 +86,11 @@ public class LearnFrame extends Frame {
     }// </editor-fold>//GEN-END:initComponents
 
 	private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-		int idx = Helpers.random(this.datasets.size());
-
-		if(this.checkIfAnswerIsEmpty()) {
-			this.counter++;
-			if(this.counter != this.datasets.size()) {
-				txt_question.setText(this.datasets.get(idx)[0]);
-				txt_answer.setText("");
-				this.datasets.remove(idx);
-			} else {
-				Helpers.debug("Finish!");
-			}
-		} else {
-			Messages.showInfo("Don't forget entering an answer!");
-		}
+		askQuestion();
 	}//GEN-LAST:event_jButton1ActionPerformed
 	@Override
 	public void toggleVisibility() {
 	    super.toggleVisibility();
-	}
-
-	private void showFirstQuestion() {
-		txt_question.setText(this.datasets.get(0)[0]);
 	}
 
 	private boolean checkIfAnswerIsEmpty() {
@@ -118,6 +98,17 @@ public class LearnFrame extends Frame {
 			return false;
 		} else {
 			return true;
+		}
+	}
+
+	private void askQuestion() {
+		int idx = Helpers.random(this.datasets.size());
+		if(!this.datasets.isEmpty()) {
+			txt_question.setText(this.datasets.get(idx)[0]);
+			txt_answer.setText("");
+			this.datasets.remove(idx);
+		} else {
+			this.toggleVisibility();
 		}
 	}
 

@@ -11,10 +11,12 @@ public class EditExerciseAreaFrame extends Frame {
 
 	private DBConnection connection;
 	private String username;
+	private MainFrame parent;
 
-	public EditExerciseAreaFrame(DBConnection connection, String username) {
+	public EditExerciseAreaFrame(DBConnection connection, MainFrame parent, String username) {
 		initComponents();
 
+		this.parent = parent;
 		this.connection = connection;
 		this.username = username;
 	}
@@ -89,7 +91,7 @@ public class EditExerciseAreaFrame extends Frame {
 
 	private void btn_editActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_editActionPerformed
 		String areaname = cb_learn_table.getSelectedItem().toString();
-		new EditFrame(connection, areaname).setVisible(true);
+		new EditFrame(connection, parent, areaname).setVisible(true);
 		this.toggleVisibility();
 	}//GEN-LAST:event_btn_editActionPerformed
 

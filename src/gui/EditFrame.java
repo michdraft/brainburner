@@ -20,8 +20,10 @@ public class EditFrame extends Frame {
 	private String areaname;
 	private OverviewExTable overview;
 	private AddDatasetAreaFrame addDatasetAreaFrame;
+	private MainFrame parent;
 
-	public EditFrame(DBConnection connection, String areaname) {
+	public EditFrame(DBConnection connection, MainFrame parent, String areaname) {
+		this.parent = parent;
 		this.connection = connection;
 		this.areaname = areaname;
 		addDatasetAreaFrame = new AddDatasetAreaFrame(connection, this, areaname);
@@ -67,7 +69,19 @@ public class EditFrame extends Frame {
 			}
 		};
 
+		Action act_closeWindow = new AbstractAction() {
+			{
+				putValue(Action.NAME, "Close window");
+//				putValue(Action.SMALL_ICON, icon_add);
+			}
+
+			public void actionPerformed(ActionEvent e) {
+				toggleVisibility();
+			}
+		};
+
 		toolbar.add(act_addDataset);
+		toolbar.add(act_closeWindow);
 		secondRow.add(toolbar);
 		toolbar.setFloatable(false);
 		toolbar.add(Box.createHorizontalGlue());
@@ -78,5 +92,11 @@ public class EditFrame extends Frame {
 
 	public void refresh() {
 		overview.refresh();
+	}
+
+	@Override
+	public void toggleVisibility() {
+		this.parent.refresh();
+		super.toggleVisibility();
 	}
 }

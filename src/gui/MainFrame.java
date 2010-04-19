@@ -36,7 +36,7 @@ public class MainFrame extends Frame {
 		this.username = current_user.getName();
 		tables_frame = new ExerciseAreaFrame(connection, this, username);
 		del_tables_frame = new DelExerciseAreaFrame(connection, this, username);
-		edit_table_frame = new EditExerciseAreaFrame(connection, username);
+		edit_table_frame = new EditExerciseAreaFrame(connection, this, username);
 		train_table_frame = new TrainExerciseAreaFrame(connection, username);
 		overview_table = new OverviewTable(connection, this.username);
 
