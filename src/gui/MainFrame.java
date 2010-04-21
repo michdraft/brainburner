@@ -16,7 +16,6 @@ import javax.swing.Action;
 import javax.swing.Box;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
-import javax.swing.JOptionPane;
 import javax.swing.JToolBar;
 
 public class MainFrame extends Frame {
@@ -57,9 +56,11 @@ public class MainFrame extends Frame {
 		Box firstRow = Box.createHorizontalBox();
 		Box secondRow = Box.createHorizontalBox();
 
-		Icon icon = new ImageIcon("data/pics/freebsd-devil.png");
-		JLabel headline = new JLabel("BrainBurner - Multiuser Lernsoftware", icon, JLabel.LEFT);
-		headline.setIconTextGap(20);
+		// Icon icon = new ImageIcon("data/pics/freebsd-devil.png");
+		// JLabel headline = new JLabel("BrainBurner - Multiuser Lernsoftware", icon, JLabel.LEFT);
+		// headline.setIconTextGap(20);
+		Icon icon = new ImageIcon("data/pics/brainburner.png");
+		JLabel headline = new JLabel(icon, JLabel.LEFT);
 		firstRow.add(headline);
 		firstRow.add(Box.createHorizontalGlue());
 		firstRow.setOpaque(true);
