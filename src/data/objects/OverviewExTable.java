@@ -15,15 +15,15 @@ import javax.swing.table.DefaultTableModel;
 public class OverviewExTable extends JScrollPane {
 	private DBConnection connection;
 	private String areaname;
-	private JTable tabelle = new JTable();
+	private int exerciseid;
 	private DefaultTableModel tableModel;
 
-	public OverviewExTable(DBConnection connection, String areaname) {
+	public OverviewExTable(DBConnection connection, String areaname, int exerciseid) {
 		this.connection = connection;
 		this.areaname = areaname;
+		this.exerciseid = exerciseid;
 
-		refresh();
-		this.setViewportView(tabelle);
+		this.refresh();
 		setVisible(true);
 
 	}
@@ -63,6 +63,7 @@ public class OverviewExTable extends JScrollPane {
 	}
 
 	public void refresh() {
+		JTable tabelle = new JTable();
 		tableModel = new DefaultTableModel();
 		tableModel.setDataVector(this.insert(connection, tableModel, areaname),
 					 new Object[]{"Question", "Answer", "Edit", "Delete"});
@@ -70,8 +71,9 @@ public class OverviewExTable extends JScrollPane {
 		tabelle.getColumn("Question").setMinWidth(300);
 		tabelle.getColumn("Answer").setMinWidth(300);
 		tabelle.getColumn("Edit").setCellRenderer(new ButtonRenderer());
-		tabelle.getColumn("Edit").setCellEditor(new ButtonEditor(new JCheckBox(), connection));
+		tabelle.getColumn("Edit").setCellEditor(new ButtonEditor(new JCheckBox(), connection, tabelle, this, this.exerciseid));
 		tabelle.getColumn("Delete").setCellRenderer(new ButtonRenderer());
-		tabelle.getColumn("Delete").setCellEditor(new ButtonEditor(new JCheckBox(), connection));
+		tabelle.getColumn("Delete").setCellEditor(new ButtonEditor(new JCheckBox(), connection, tabelle, this, this.exerciseid));
+		this.setViewportView(tabelle);
 	}
 }

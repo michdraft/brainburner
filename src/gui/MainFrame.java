@@ -3,6 +3,7 @@ package gui;
 import data.DBConnection;
 import data.objects.OverviewTable;
 import data.objects.User;
+import helper.Messages;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.FlowLayout;
@@ -15,6 +16,7 @@ import javax.swing.Action;
 import javax.swing.Box;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
+import javax.swing.JOptionPane;
 import javax.swing.JToolBar;
 
 public class MainFrame extends Frame {
@@ -179,17 +181,33 @@ public class MainFrame extends Frame {
 	}
 
 	private void deleteExerciseArea() {
-		del_tables_frame.toggleVisibility();
 		del_tables_frame.refreshCbExerciseArea();
+
+		if(del_tables_frame.checkComboBox()) {
+			del_tables_frame.toggleVisibility();
+		} else {
+			Messages.showInfo("There is no list to delete!");
+		}
+		
 	}
 
 	private void editExerciseArea() {
-		edit_table_frame.toggleVisibility();
 		edit_table_frame.refreshCbExerciseArea();
+		
+		if(edit_table_frame.checkComboBox()) {
+			edit_table_frame.toggleVisibility();
+		} else {
+			Messages.showInfo("There is no list to edit!");
+		}
 	}
 
 	private void trainExerciseArea() {
-		train_table_frame.toggleVisibility();
 		train_table_frame.refreshCbExerciseArea();
+
+		if(train_table_frame.checkComboBox()) {
+			train_table_frame.toggleVisibility();
+		} else {
+			Messages.showInfo("There is no list to learn!");
+		}
 	}
 }

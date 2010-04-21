@@ -24,14 +24,19 @@
               <Group type="103" groupAlignment="0" attributes="0">
                   <Component id="lbl_header" min="-2" max="-2" attributes="0"/>
                   <Group type="102" alignment="0" attributes="0">
-                      <Component id="lbl_learn_table" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace max="-2" attributes="0"/>
-                      <Component id="cb_learn_table" pref="136" max="32767" attributes="1"/>
+                      <Component id="lbl_question" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace pref="25" max="32767" attributes="0"/>
+                      <Component id="txt_question" min="-2" pref="161" max="-2" attributes="0"/>
                   </Group>
                   <Group type="102" alignment="1" attributes="0">
-                      <Component id="btn_delete" min="-2" max="-2" attributes="0"/>
+                      <Component id="btn_edit" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="btn_cancel" min="-2" max="-2" attributes="0"/>
+                  </Group>
+                  <Group type="102" alignment="1" attributes="0">
+                      <Component id="lbl_question1" pref="62" max="32767" attributes="0"/>
+                      <EmptySpace min="-2" pref="10" max="-2" attributes="0"/>
+                      <Component id="txt_answer" min="-2" pref="161" max="-2" attributes="0"/>
                   </Group>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
@@ -45,15 +50,20 @@
               <Component id="lbl_header" min="-2" max="-2" attributes="0"/>
               <EmptySpace type="separate" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="cb_learn_table" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="lbl_learn_table" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="lbl_question" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="txt_question" alignment="3" min="-2" pref="20" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace min="-2" pref="12" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="txt_answer" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="lbl_question1" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace type="unrelated" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="btn_delete" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="btn_edit" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="btn_cancel" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace pref="26" max="32767" attributes="0"/>
+              <EmptySpace pref="19" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -64,27 +74,20 @@
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="Dialog" size="18" style="1"/>
         </Property>
-        <Property name="text" type="java.lang.String" value="Delete Learn table"/>
+        <Property name="text" type="java.lang.String" value="Edit Dataset"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JComboBox" name="cb_learn_table">
+    <Component class="javax.swing.JLabel" name="lbl_question">
       <Properties>
-        <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-          <StringArray count="0"/>
-        </Property>
+        <Property name="text" type="java.lang.String" value="Question:"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JLabel" name="lbl_learn_table">
+    <Component class="javax.swing.JButton" name="btn_edit">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Learn Table:"/>
-      </Properties>
-    </Component>
-    <Component class="javax.swing.JButton" name="btn_delete">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="Delete"/>
+        <Property name="text" type="java.lang.String" value="Edit"/>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btn_deleteActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btn_editActionPerformed"/>
       </Events>
     </Component>
     <Component class="javax.swing.JButton" name="btn_cancel">
@@ -94,6 +97,15 @@
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btn_cancelActionPerformed"/>
       </Events>
+    </Component>
+    <Component class="javax.swing.JTextField" name="txt_question">
+    </Component>
+    <Component class="javax.swing.JTextField" name="txt_answer">
+    </Component>
+    <Component class="javax.swing.JLabel" name="lbl_question1">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Answer:"/>
+      </Properties>
     </Component>
   </SubComponents>
 </Form>

@@ -1,13 +1,14 @@
 package helper;
 
 import data.DBConnection;
+import data.objects.OverviewExTable;
+import gui.EditDatasetAreaFrame;
 import java.awt.Component;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.DefaultCellEditor;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
-import javax.swing.JOptionPane;
 import javax.swing.JTable;
 
 public class ButtonEditor extends DefaultCellEditor {
@@ -15,10 +16,17 @@ public class ButtonEditor extends DefaultCellEditor {
 	protected JButton button;
 	private String label;
 	private boolean isPushed;
+	private int exerciseid;
+	private JTable jtable;
+	private OverviewExTable parent;
 
-	public ButtonEditor(JCheckBox checkBox, DBConnection connection) {
+	public ButtonEditor(JCheckBox checkBox, DBConnection connection,
+			JTable jtable, OverviewExTable parent, int exerciseid) {
 		super(checkBox);
 		this.connection = connection;
+		this.parent = parent;
+		this.jtable = jtable;
+		this.exerciseid = exerciseid;
 		button = new JButton();
 		button.setOpaque(true);
 		button.addActionListener(new ActionListener() {
@@ -46,8 +54,14 @@ public class ButtonEditor extends DefaultCellEditor {
 
 	@Override
 	public Object getCellEditorValue() {
-		if (isPushed)  {
-			JOptionPane.showMessageDialog(button ,label + ": noch keine Funktion!");
+		int row = this.jtable.getSelectedRow();
+		String question = this.jtable.getValueAt(row, 0).toString();
+		String answer = this.jtable.getValueAt(row, 1).toString();
+
+		if (isPushed && button.getText().equals("Delete"))  {
+			deleteDataset(question, answer);
+		} else if(isPushed && button.getText().equals("Edit")) {
+			editDataset(question, answer);
 		}
 		isPushed = false;
 		return new String( label ) ;
@@ -64,19 +78,20 @@ public class ButtonEditor extends DefaultCellEditor {
 		super.fireEditingStopped();
 	}
 
-	// in Arbeit
 	private boolean deleteDataset(String question, String answer) {
-		String sql_delete = "delete from pool " + 
-			"where question = '" + question + "' and answer = '" + answer + "'";
+
+		String sql_delete = "delete from pool " +
+			"where question = '" + question + "' and answer = '" + answer + "'" +
+			"and exerciseareaid = " + this.exerciseid;
 		if(connection.updateDB(sql_delete) == 1) {
+			this.parent.refresh();
 			return true;
 		} else {
 			return false;
 		}
 	}
 
-	// in Arbeit
 	private void editDataset(String question, String answer) {
-
+		new EditDatasetAreaFrame(connection, question, answer, this.parent, this.exerciseid).toggleVisibility();
 	}
 }

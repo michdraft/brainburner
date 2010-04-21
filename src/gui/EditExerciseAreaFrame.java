@@ -11,6 +11,7 @@ public class EditExerciseAreaFrame extends Frame {
 
 	private DBConnection connection;
 	private String username;
+	private String areaname;
 	private MainFrame parent;
 
 	public EditExerciseAreaFrame(DBConnection connection, MainFrame parent, String username) {
@@ -90,8 +91,8 @@ public class EditExerciseAreaFrame extends Frame {
         }// </editor-fold>//GEN-END:initComponents
 
 	private void btn_editActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_editActionPerformed
-		String areaname = cb_learn_table.getSelectedItem().toString();
-		new EditFrame(connection, parent, areaname).setVisible(true);
+		this.areaname = cb_learn_table.getSelectedItem().toString();
+		new EditFrame(connection, parent, areaname, this.getExerciseAreaID()).setVisible(true);
 		this.toggleVisibility();
 	}//GEN-LAST:event_btn_editActionPerformed
 
@@ -112,8 +113,21 @@ public class EditExerciseAreaFrame extends Frame {
 		}
 	}
 
+	public boolean checkComboBox() {
+		if(cb_learn_table.getItemCount() == 0) {
+			return false;
+		} else {
+			return true;
+		}
+	}
+
 	public void refreshCbExerciseArea() {		
 		this.showExerciseAreasInJComboBox();
+	}
+
+	public int getExerciseAreaID() {
+		int exerciseid = ExerciseAreas.getExerciseArea(connection, this.areaname).getId();
+		return exerciseid;
 	}
 
 	@Override

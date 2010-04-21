@@ -118,6 +118,7 @@ public class DelExerciseAreaFrame extends Frame {
 		if(connection.updateDB(sql_delete) == 1) {
 			parent.refresh();
 			this.refreshCbExerciseArea();
+			this.toggleVisibility();
 			return true;
 		} else {
 			return false;
@@ -126,6 +127,14 @@ public class DelExerciseAreaFrame extends Frame {
 
 	public void refreshCbExerciseArea() {		
 		this.showExerciseAreasInJComboBox();
+	}
+
+	public boolean checkComboBox() {
+		if(cb_learn_table.getItemCount() == 0) {
+			return false;
+		} else {
+			return true;
+		}
 	}
 
 	@Override

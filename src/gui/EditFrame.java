@@ -21,16 +21,18 @@ public class EditFrame extends Frame {
 	
 	private DBConnection connection;
 	private String areaname;
+	private int exerciseid;
 	private OverviewExTable overview;
 	private AddDatasetAreaFrame addDatasetAreaFrame;
 	private MainFrame parent;
 
-	public EditFrame(DBConnection connection, MainFrame parent, String areaname) {
+	public EditFrame(DBConnection connection, MainFrame parent, String areaname, int exerciseid) {
 		this.parent = parent;
 		this.connection = connection;
 		this.areaname = areaname;
+		this.exerciseid = exerciseid;
 		addDatasetAreaFrame = new AddDatasetAreaFrame(connection, this, areaname);
-		overview = new OverviewExTable(connection, areaname);
+		overview = new OverviewExTable(connection, this.areaname, this.exerciseid);
 		
 		this.setMinimumSize(new Dimension(800, 600));
 		this.setTitle("Window for editing a Learn Table");

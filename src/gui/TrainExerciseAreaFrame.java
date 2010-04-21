@@ -128,6 +128,14 @@ public class TrainExerciseAreaFrame extends Frame {
 		this.showExerciseAreasInJComboBox();
 	}
 
+	public boolean checkComboBox() {
+		if(cb_learn_table.getItemCount() == 0) {
+			return false;
+		} else {
+			return true;
+		}
+	}
+
 	@Override
 	public void toggleVisibility() {
 		super.toggleVisibility();
