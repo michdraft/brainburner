@@ -1,17 +1,35 @@
 package gui;
 
+import data.DBConnection;
+import data.Statistics;
+import data.objects.ExerciseArea;
+import data.objects.Statistic;
+import data.objects.User;
 import helper.Helpers;
 import helper.Messages;
 import java.util.ArrayList;
+import java.util.Date;
 
 public class LearnFrame extends Frame {
 
 	private ArrayList<String[]> datasets;
 	private int idx;
+	private User user;
+	private ExerciseArea exerciseareaid;
+	private double percent;
+	private int words_right, words_wrong;
+	private DBConnection connection;
 	
-	public LearnFrame(ArrayList<String[]> datasets) {
+	public LearnFrame(DBConnection connection, ArrayList<String[]> datasets,
+		User user, ExerciseArea exerciseareaid) {
 		initComponents();
 
+		this.user = user;
+		this.exerciseareaid = exerciseareaid;
+		this.percent = 0;
+		this.words_right = 0;
+		this.words_wrong = 0;
+		this.connection = connection;
 		this.datasets = datasets;
 		this.idx = 0;
 		this.askQuestion();
@@ -118,10 +136,23 @@ public class LearnFrame extends Frame {
 		if (this.datasets.get(idx)[1].equals(answer)) {
 			Messages.showInfo("correct answer");
 			this.datasets.remove(idx);
+			this.words_right++;
 		} else {
 			Messages.showInfo("wrong answer");
 			this.datasets.remove(idx);
+			this.words_wrong++;
 		}
+
+		/* Learning is finished */
+		if (this.datasets.isEmpty())
+			saveStatistic();
+	}
+
+	private void saveStatistic() {
+		percent = (double)words_right / (double)(words_right + words_wrong) * 100;
+		Messages.showInfo((int)percent + "% right (" + words_right + " right, " + words_wrong + " wrong)");
+		Statistic s = new Statistic(user.getId(), exerciseareaid.getId(), (int)percent, new Date());
+		Statistics.addStatistic(connection, s);
 	}
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

@@ -38,3 +38,12 @@ create table lang_table_rel (
 	languageid int references languages(id),
 	exerciseareaid int references exercisearea(id) on delete cascade
 );
+
+-- Table statistic
+create table statistic (
+	id int primary key not null generated always as identity,
+	userid int references users(id),
+	exerciseareaid int references exercisearea(id) on delete cascade,
+	percent decimal,
+	learndate bigint
+);

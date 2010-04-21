@@ -99,7 +99,7 @@ public class TrainExerciseAreaFrame extends Frame {
 		this.toggleVisibility(); this.createArrayList();
 		System.out.println(this.datasets.size());
 		if(checkIfArrayIsEmpty() == false) {
-			new LearnFrame(this.datasets).toggleVisibility();
+			new LearnFrame(connection, this.datasets, new User(null, null, 1), new ExerciseArea(null, 1)).toggleVisibility();
 		} else {
 			Messages.showInfo(cb_learn_table.getSelectedItem().toString()+
 						" is empty!");
