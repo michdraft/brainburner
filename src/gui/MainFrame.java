@@ -17,6 +17,7 @@ import javax.swing.Box;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JToolBar;
+import javax.swing.KeyStroke;
 
 public class MainFrame extends Frame {
 	DBConnection connection;
@@ -69,6 +70,8 @@ public class MainFrame extends Frame {
 		northPanel.add(firstRow);
 
 		JToolBar toolbar = new JToolBar();
+		toolbar.setPreferredSize(new Dimension(800, 30));
+
 		final Icon icon_newlist = new ImageIcon("data/icons/add.png");
 		final Icon icon_edit = new ImageIcon("data/icons/edit.png");
 		final Icon icon_delete = new ImageIcon("data/icons/delete.png");
