@@ -70,7 +70,7 @@ public class OverviewTable extends JScrollPane {
 				arrayList.add(array);
 			}
 		} catch (SQLException e) {
-			Helpers.debug("insert: Error: %s\n", e.getMessage());
+			Helpers.debug("select: Error: %s\n", e.getMessage());
 		}
 
 		return getLanguagename(arrayList);
@@ -89,7 +89,7 @@ public class OverviewTable extends JScrollPane {
 					arrayList.get(i)[2] = result_set.getString("LANGUAGENAME");
 				}
 			} catch (SQLException e) {
-				Helpers.debug("insert: Error: %s\n", e.getMessage());
+				Helpers.debug("select: Error: %s\n", e.getMessage());
 			}
 		}
 		return getNumber(arrayList);

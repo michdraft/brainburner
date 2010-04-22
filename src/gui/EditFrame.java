@@ -2,6 +2,7 @@ package gui;
 
 import data.DBConnection;
 import data.objects.OverviewExTable;
+import helper.Helpers;
 import helper.Messages;
 import java.awt.BorderLayout;
 import java.awt.Color;
@@ -12,6 +13,11 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.AbstractAction;
 import javax.swing.Action;
 import javax.swing.Box;
@@ -29,6 +35,7 @@ public class EditFrame extends Frame {
 	private OverviewExTable overview;
 	private AddDatasetAreaFrame addDatasetAreaFrame;
 	private MainFrame parent;
+	private JTextField txt_search;
 
 	public EditFrame(DBConnection connection, MainFrame parent, String areaname, int exerciseid) {
 		this.parent = parent;
@@ -62,9 +69,8 @@ public class EditFrame extends Frame {
 		Box secondRow = Box.createHorizontalBox();
 
 		Icon icon = new ImageIcon("data/pics/brainburner.png");
-		JLabel headline = new JLabel("BrainBurner - Multiuser Lernsoftware", icon, JLabel.LEFT);
+		JLabel headline = new JLabel(icon);
 
-		headline.setIconTextGap(20);
 		firstRow.add(headline);
 		firstRow.add(Box.createHorizontalGlue());
 		firstRow.setOpaque(true);
@@ -77,7 +83,7 @@ public class EditFrame extends Frame {
 
 		JLabel lbl_search = new JLabel("Search:");
 
-		JTextField txt_search = new JTextField();
+		txt_search = new JTextField();
 		txt_search.setPreferredSize(new Dimension(120, toolbar.getPreferredSize().height-10));
 		txt_search.setMaximumSize(new Dimension(120, toolbar.getPreferredSize().height-10));
 
@@ -126,7 +132,56 @@ public class EditFrame extends Frame {
 	}
 
 	public void searchWord() {
-		System.out.println("Function for searching a word!");
+		if(this.checkSearchfield()) {			
+			String input = txt_search.getText().trim().toLowerCase();
+			ArrayList<Object[]> list = new ArrayList<Object[]>();
+
+			String sql_select = "select question, answer " +
+				"from pool where exerciseareaid = " + this.exerciseid +
+				" and(lower(question) like '" + input + "'" +
+				" or lower(question) like '%" + input + " %'" +
+				" or lower(question) like '% " + input + "%'" +
+				" or lower(answer) like '" + input + "'" +
+				" or lower(answer) like '%" + input + " %'" +
+				" or lower(answer) like '% " + input + "%')";
+
+			ResultSet result_set = connection.queryDB(sql_select);
+
+			try {
+				while (result_set.next()) {
+					Object[] obj = new Object[2];
+					obj[0] = result_set.getString("question");
+					obj[1] = result_set.getString("answer");
+					list.add(obj);
+				}
+			} catch (SQLException e) {
+				Helpers.debug("select: Error: %s\n", e.getMessage());
+			}
+			if(checkHits(list)) {
+				txt_search.setText("");
+				new HitlistFrame(connection, list).toggleVisibility();
+			} else {
+				Messages.showInfo("No matches found!");
+			}
+		} else {
+			Messages.showInfo("Keyword is missing!");
+		}
+	}
+
+	private boolean checkSearchfield() {
+		if(txt_search.getText().isEmpty()) {
+			return false;
+		} else {
+			return true;
+		}
+	}
+
+	private boolean checkHits(ArrayList<Object[]> list) {
+		if(list.isEmpty()) {
+			return false;
+		} else {
+			return true;
+		}
 	}
 
 	public void refresh() {
