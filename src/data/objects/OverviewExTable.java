@@ -32,10 +32,8 @@ public class OverviewExTable extends JScrollPane {
 	* Die insert-Methode zeigt alle Fragen und Antworten des gewählten Übungsbereichs an!
 	*/
 	public Object[][] insert(DBConnection connection, DefaultTableModel model, String areaname) {
-		String query =  "select POOL.QUESTION, POOL.ANSWER " +
-			        "from EXERCISEAREA join POOL " +
-				"on EXERCISEAREA.ID = POOL.EXERCISEAREAID " +
-				"where EXERCISEAREA.AREANAME = '" + areaname + "'";
+
+		String query = "select * from overviewextable where overviewextable.areaname = '" + areaname + "'";
 
 		ResultSet result_set = connection.queryDB(query);
 		

@@ -55,10 +55,8 @@ public class OverviewTable extends JScrollPane {
 	
 	public ArrayList<String[]> getAreanameAndId(ArrayList<String[]> arrayList, int userid) {
 
-		String query = "select EXERCISEAREA.AREANAME, EXERCISEAREA.ID " +
-			       "from USER_TABLE_REL join EXERCISEAREA " +
-			       "on USER_TABLE_REL.EXERCISEAREAID = EXERCISEAREA.ID " +
-			       "where USER_TABLE_REL.USERID = " + userid;
+		String query = "select * from overviewtableAreanameId where " +
+			"overviewtableAreanameId.USERID = " + userid;
 
 		ResultSet result_set = connection.queryDB(query);
 
@@ -78,11 +76,8 @@ public class OverviewTable extends JScrollPane {
 
 	public ArrayList<String[]> getLanguagename(ArrayList<String[]> arrayList) {
 		for(int i=0; i<arrayList.size(); i++) {
-			String query_languagename =
-				"select LANGUAGES.LANGUAGENAME " +
-				"from LANG_TABLE_REL join LANGUAGES " +
-				"on LANG_TABLE_REL.LANGUAGEID = LANGUAGES.ID " +
-				"where LANG_TABLE_REL.EXERCISEAREAID = " + arrayList.get(i)[1];
+			String query_languagename = "select * from overviewtableLanguagename " +
+				"where overviewtableLanguagename.exerciseareaid = " + arrayList.get(i)[1];
 			ResultSet result_set = connection.queryDB(query_languagename);
 			try {
 				while(result_set.next()) {

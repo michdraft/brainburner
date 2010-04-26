@@ -13,7 +13,6 @@ import javax.swing.JLabel;
 import java.awt.Dimension;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
-import java.awt.event.WindowListener;
 import javax.swing.AbstractAction;
 import javax.swing.Action;
 import javax.swing.Box;
@@ -237,10 +236,7 @@ public class MainFrame extends Frame {
 		}
 	}
 
-<<<<<<< HEAD
-=======
 	private void showStatisticFrame() {
 		statistic_frame.toggleVisibility();
 	}
->>>>>>> origin/master
 }
