@@ -2,8 +2,10 @@ package data;
 
 import helper.Helpers;
 import data.objects.Statistic;
+import data.objects.User;
 import java.sql.ResultSet;
 import java.util.ArrayList;
+import java.util.Date;
 
 public class Statistics extends ArrayList<Statistic> {
 	public static boolean addStatistic(DBConnection connection, Statistic statistic) {
@@ -20,26 +22,28 @@ public class Statistics extends ArrayList<Statistic> {
 			return false;
 	}
 
-	/*
-	public static Statistics getAllStatistics(DBConnection connection) {
-		String query = "select * from languages";
+	public static Statistics getAllStatisticsFromUser(DBConnection connection, User user) {
+		String query = String.format("select * from statistic where statistic.userid = %d", user.getId());
 
 		ResultSet result_set = connection.queryDB(query);
-		Statistics languages = new Statistics();
+		Statistics statistics = new Statistics();
 
 		try {
 			while (result_set.next()) {
-				languages.add(new Language(result_set.getString("LANGUAGENAME"),
-							   result_set.getInt("ID")));
+				statistics.add(new Statistic(result_set.getInt("USERID"),
+					result_set.getInt("EXERCISEAREAID"),
+					result_set.getInt("PERCENT"),
+					new Date(result_set.getLong("LEARNDATE"))));
 			}
 
-			return languages;
+			return statistics;
 		} catch (Exception e) {
-			Helpers.debug("getAllLanguages: Error: %s\n", e.getMessage());
+			Helpers.debug("getAllStatistics: Error: %s\n", e.getMessage());
 			return null;
 		}
 	}
 
+	/*
 	public static Language getStatistic(DBConnection connection, String language) {
 		String query = String.format("select * from languages where languagename='%s'", language);
 

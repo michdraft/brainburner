@@ -17,7 +17,6 @@ import javax.swing.Box;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JToolBar;
-import javax.swing.KeyStroke;
 
 public class MainFrame extends Frame {
 	DBConnection connection;
@@ -26,6 +25,7 @@ public class MainFrame extends Frame {
 	DelExerciseAreaFrame del_tables_frame;
 	EditExerciseAreaFrame edit_table_frame;
 	TrainExerciseAreaFrame train_table_frame;
+	StatisticFrame statistic_frame;
 	JPanel southPanel;
 	JLabel currentUser;
 	String username;
@@ -39,8 +39,9 @@ public class MainFrame extends Frame {
 		tables_frame = new ExerciseAreaFrame(connection, this, username);
 		del_tables_frame = new DelExerciseAreaFrame(connection, this, username);
 		edit_table_frame = new EditExerciseAreaFrame(connection, this, username);
-		train_table_frame = new TrainExerciseAreaFrame(connection, username);
+		train_table_frame = new TrainExerciseAreaFrame(connection, current_user);
 		overview_table = new OverviewTable(connection, this.username);
+		statistic_frame = new StatisticFrame(connection, current_user);
 
 		this.setMinimumSize(new Dimension(800, 600));
 		this.setTitle("BrainBurner");
@@ -130,7 +131,7 @@ public class MainFrame extends Frame {
 			}
 
 			public void actionPerformed(ActionEvent e) {
-				throw new UnsupportedOperationException("Not supported yet.");
+				showStatisticFrame();
 			}
 		};
 
@@ -213,5 +214,9 @@ public class MainFrame extends Frame {
 		} else {
 			Messages.showInfo("There is no list to learn!");
 		}
+	}
+
+	private void showStatisticFrame() {
+		statistic_frame.toggleVisibility();
 	}
 }

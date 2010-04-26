@@ -33,7 +33,7 @@ public class LoginFrame extends Frame {
 	private JLabel lbl_header, lbl_username, lbl_password, lbl_register;
 	private JTextField txt_username;
 	private JPasswordField pwd_password;
-	private JButton btn_ok, btn_cancel, btn_new_user;
+	private JButton btn_ok, btn_cancel;
 	private JPanel pnl_input, pnl_buttons;
 
 	public LoginFrame(final DBConnection connection) {
