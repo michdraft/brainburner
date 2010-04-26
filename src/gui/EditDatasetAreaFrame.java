@@ -25,6 +25,8 @@ public class EditDatasetAreaFrame extends Frame {
 
 		txt_question.setText(question);
 		txt_answer.setText(answer);
+
+		this.getRootPane().setDefaultButton(btn_edit);
 	}
 
 	@SuppressWarnings("unchecked")
