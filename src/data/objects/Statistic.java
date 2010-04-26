@@ -18,12 +18,6 @@ public class Statistic {
 		this.date = date;
 	}
 
-	/*
-	public Statistic() {
-
-	}
-	*/
-
 	/**
 	 * @return the id
 	 */

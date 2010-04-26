@@ -51,7 +51,7 @@ public class ExerciseAreas extends ArrayList<ExerciseArea> {
 
 		int userid = Users.getUser(connection, username).getId();
 
-		String query = "select EXERCISEAREA.AREANAME " +
+		String query = "select EXERCISEAREA.AREANAME, EXERCISEAREA.ID " +
 			       "from USER_TABLE_REL join EXERCISEAREA " +
 			       "on USER_TABLE_REL.EXERCISEAREAID = EXERCISEAREA.ID " +
 			       "where USER_TABLE_REL.USERID = " + userid;
@@ -61,7 +61,8 @@ public class ExerciseAreas extends ArrayList<ExerciseArea> {
 
 		try {
 			while (result_set.next()) {
-				exerciseareas.add(new ExerciseArea(result_set.getString("AREANAME")));
+				exerciseareas.add(new ExerciseArea(result_set.getString("AREANAME"),
+					result_set.getInt("ID")));
 			}
 			return exerciseareas;
 		} catch (Exception e) {

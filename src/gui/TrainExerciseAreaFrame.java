@@ -15,14 +15,14 @@ import java.util.ArrayList;
 public class TrainExerciseAreaFrame extends Frame {
 
 	private DBConnection connection;
-	private String username;
+	private User user;
 	private ArrayList<String[]> datasets;
 
-	public TrainExerciseAreaFrame(DBConnection connection, String username) {
+	public TrainExerciseAreaFrame(DBConnection connection, User user) {
 		initComponents();
 
 		this.connection = connection;
-		this.username = username;
+		this.user = user;
 		this.datasets = new ArrayList<String[]> ();
 
 		this.getRootPane().setDefaultButton(btn_train);
@@ -101,7 +101,7 @@ public class TrainExerciseAreaFrame extends Frame {
 		this.toggleVisibility(); this.createArrayList();
 		System.out.println(this.datasets.size());
 		if(checkIfArrayIsEmpty() == false) {
-			new LearnFrame(connection, this.datasets, new User(null, null, 1), new ExerciseArea(null, 1)).toggleVisibility();
+			new LearnFrame(connection, this.datasets, user, (ExerciseArea)cb_learn_table.getSelectedItem()).toggleVisibility();
 		} else {
 			Messages.showInfo(cb_learn_table.getSelectedItem().toString()+
 						" is empty!");
@@ -120,9 +120,10 @@ public class TrainExerciseAreaFrame extends Frame {
 	{
 		cb_learn_table.removeAllItems();
 		ExerciseAreas exerciseareas = ExerciseAreas.getAllExerciseAreasFromUser(
-						connection, this.username);
+						connection, this.user.getName());
 		for (ExerciseArea e : exerciseareas) {
 			cb_learn_table.addItem(e);
+			Helpers.debug("foo: %s : %d\n", e.getAreaname(), e.getId());
 		}
 	}
 
