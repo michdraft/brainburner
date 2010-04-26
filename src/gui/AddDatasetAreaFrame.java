@@ -15,6 +15,8 @@ public class AddDatasetAreaFrame extends Frame {
 		this.areaname = areaname;
 
 		this.parent = parent;
+
+		this.getRootPane().setDefaultButton(btn_add);
 	}
 
 	@SuppressWarnings("unchecked")

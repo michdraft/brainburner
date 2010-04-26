@@ -20,6 +20,8 @@ public class EditExerciseAreaFrame extends Frame {
 		this.parent = parent;
 		this.connection = connection;
 		this.username = username;
+
+		this.getRootPane().setDefaultButton(btn_edit);
 	}
 
 	@SuppressWarnings("unchecked")

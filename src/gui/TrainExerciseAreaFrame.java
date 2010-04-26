@@ -24,6 +24,8 @@ public class TrainExerciseAreaFrame extends Frame {
 		this.connection = connection;
 		this.username = username;
 		this.datasets = new ArrayList<String[]> ();
+
+		this.getRootPane().setDefaultButton(btn_train);
 	}
 
 	@SuppressWarnings("unchecked")

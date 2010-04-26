@@ -20,6 +20,8 @@ public class DelExerciseAreaFrame extends Frame {
 		this.connection = connection;
 		this.parent = parent;
 		this.username = username;
+
+		this.getRootPane().setDefaultButton(btn_delete);
 	}
 
 	@SuppressWarnings("unchecked")

@@ -32,6 +32,8 @@ public class LearnFrame extends Frame {
 		this.connection = connection;
 		this.datasets = datasets;
 		this.idx = 0;
+
+		this.getRootPane().setDefaultButton(jButton1);
 		this.askQuestion();
 	}
 

@@ -24,6 +24,8 @@ public class ExerciseAreaFrame extends Frame {
 		this.connection = connection;
 		this.username = username;
 
+		this.getRootPane().setDefaultButton(btn_create);
+
 		this.showLanguagesInJComboBox();
 	}
 

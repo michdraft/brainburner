@@ -11,13 +11,16 @@ import java.awt.event.ActionEvent;
 import javax.swing.JPanel;
 import javax.swing.JLabel;
 import java.awt.Dimension;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
+import java.awt.event.WindowListener;
 import javax.swing.AbstractAction;
 import javax.swing.Action;
 import javax.swing.Box;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
+import javax.swing.JOptionPane;
 import javax.swing.JToolBar;
-import javax.swing.KeyStroke;
 
 public class MainFrame extends Frame {
 	DBConnection connection;
@@ -32,7 +35,7 @@ public class MainFrame extends Frame {
 	OverviewTable overview_table;
 
 	public MainFrame(DBConnection connection, User current_user, String username) {
-		this.setDefaultCloseOperation(EXIT_ON_CLOSE);
+		this.setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
 		this.connection = connection;
 		this.current_user = current_user;
 		this.username = current_user.getName();
@@ -50,6 +53,23 @@ public class MainFrame extends Frame {
 		borderLayoutNorth();
 		borderLayoutCenter();
 		borderLayoutSouth();
+
+		this.addWindowListener(new WindowAdapter() {
+			@Override
+			public void windowClosing(WindowEvent event) {
+				Object[] options = {"Yes", "No"};
+				int result = JOptionPane.showOptionDialog(null, 
+					"Do you really want to exit the program?",
+					"Programm Exit",
+					JOptionPane.YES_NO_OPTION,
+					JOptionPane.QUESTION_MESSAGE,
+					null, options, null);
+
+				if(result == 0) {
+					System.exit(0);
+				}
+			}
+		});
 	}
 
 	private void borderLayoutNorth() {
@@ -214,4 +234,5 @@ public class MainFrame extends Frame {
 			Messages.showInfo("There is no list to learn!");
 		}
 	}
+
 }
