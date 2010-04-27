@@ -28,7 +28,6 @@ public class MainFrame extends Frame {
 	DelExerciseAreaFrame del_tables_frame;
 	EditExerciseAreaFrame edit_table_frame;
 	TrainExerciseAreaFrame train_table_frame;
-	StatisticFrame statistic_frame;
 	JPanel southPanel;
 	JLabel currentUser;
 	String username;
@@ -44,7 +43,6 @@ public class MainFrame extends Frame {
 		edit_table_frame = new EditExerciseAreaFrame(connection, this, username);
 		train_table_frame = new TrainExerciseAreaFrame(connection, current_user);
 		overview_table = new OverviewTable(connection, this.username);
-		statistic_frame = new StatisticFrame(connection, current_user);
 
 		this.setMinimumSize(new Dimension(800, 600));
 		this.setTitle("BrainBurner");
@@ -237,6 +235,6 @@ public class MainFrame extends Frame {
 	}
 
 	private void showStatisticFrame() {
-		statistic_frame.toggleVisibility();
+		new StatisticFrame(connection, current_user).toggleVisibility();
 	}
 }

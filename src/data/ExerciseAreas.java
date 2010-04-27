@@ -84,4 +84,22 @@ public class ExerciseAreas extends ArrayList<ExerciseArea> {
 			return null;
 		}
 	}
+
+	public static ExerciseArea getExerciseAreaById(DBConnection connection, int id) {
+		String query = String.format("select * from exercisearea where id=%d", id);
+
+		ResultSet result_set = connection.queryDB(query);
+
+		try {
+			if (result_set.next()) {
+				return new ExerciseArea(result_set.getString("AREANAME"),
+						    result_set.getInt("ID"));
+			} else {
+				return null;
+			}
+		} catch (Exception e) {
+			Helpers.debug("getExerciseArea: Error: %s\n", e.getMessage());
+			return null;
+		}
+	}
 }

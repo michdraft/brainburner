@@ -61,4 +61,23 @@ public class Users extends ArrayList<User> {
 			return null;
 		}
 	}
+
+	public static User getUserByID(DBConnection connection, int id) {
+		String query = String.format("select * from users where id=%d", id);
+
+		ResultSet result_set = connection.queryDB(query);
+
+		try {
+			if (result_set.next()) {
+				return new User(result_set.getString("USERNAME"),
+						result_set.getString("PASSWORD"),
+						result_set.getInt("ID"));
+			} else {
+				return null;
+			}
+		} catch (Exception e) {
+			Helpers.debug("getUser: Error: %s\n", e.getMessage());
+			return null;
+		}
+	}
 }

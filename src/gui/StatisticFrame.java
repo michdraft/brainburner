@@ -1,18 +1,18 @@
 package gui;
 
 import data.DBConnection;
+import data.ExerciseAreas;
 import data.Statistics;
+import data.Users;
+import data.objects.Statistic;
 import data.objects.StatisticTable;
 import data.objects.User;
-import helper.Helpers;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
-import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.util.ArrayList;
 import javax.swing.Box;
 import javax.swing.JLabel;
@@ -63,29 +63,16 @@ public class StatisticFrame extends Frame {
 	private ArrayList<Object[]> getData() {
 		Statistics statistics = Statistics.getAllStatisticsFromUser(connection, user);
 		ArrayList<Object[]> list = new ArrayList<Object[]>();
-		String sql_select = String.format("select username from users where users.id = %d", user.getId());
 
-		ResultSet result_set = connection.queryDB(sql_select);
-
-		try {
-			while (result_set.next()) {
-				Object[] obj = new Object[4];
-				obj[0] = result_set.getString("USERNAME");
-				obj[1] = "foo";
-				obj[2] = "la";
-				obj[3] = "la";
-				list.add(obj);
-			}
-
-			return list;
-		} catch (SQLException e) {
-			Helpers.debug("select: Error: %s\n", e.getMessage());
-			return null;
+		for (Statistic s : statistics) {
+			Object[] obj = new Object[4];
+			obj[0] = Users.getUserByID(connection, s.getUserid()).getName();
+			obj[1] = ExerciseAreas.getExerciseAreaById(connection, s.getExerciseareaid()).getAreaname();
+			obj[2] = s.getPercent();
+			obj[3] = s.getDate().toLocaleString();
+			list.add(obj);
 		}
-	}
 
-	@Override
-	public void toggleVisibility() {
-		super.toggleVisibility();
+		return list;
 	}
 }

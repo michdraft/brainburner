@@ -29,11 +29,12 @@ public class StatisticTable extends JScrollPane {
 	}
 
 	public void refresh() {
-		JTable tabelle = new JTable();
+		JTable table = new JTable();
 		tableModel = new DefaultTableModel();
 		tableModel.setDataVector(this.insert(connection),
 					 new Object[]{"User", "Area", "%", "Datum"});
-		tabelle.setModel(tableModel);
-		this.setViewportView(tabelle);
+		table.setModel(tableModel);
+		table.getColumn("%").setMaxWidth(50);
+		this.setViewportView(table);
 	}
 }

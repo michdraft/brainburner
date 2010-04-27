@@ -48,7 +48,6 @@ create table statistic (
 	learndate bigint
 );
 
-
 # OvervieExTable Views
 create view overviewextable as (
 	select POOL.QUESTION, POOL.ANSWER, EXERCISEAREA.AREANAME from EXERCISEAREA join POOL

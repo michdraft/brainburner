@@ -42,24 +42,4 @@ public class Statistics extends ArrayList<Statistic> {
 			return null;
 		}
 	}
-
-	/*
-	public static Language getStatistic(DBConnection connection, String language) {
-		String query = String.format("select * from languages where languagename='%s'", language);
-
-		ResultSet result_set = connection.queryDB(query);
-
-		try {
-			if (result_set.next()) {
-				return new Language(result_set.getString("LANGUAGENAME"),
-						    result_set.getInt("ID"));
-			} else {
-				return null;
-			}
-		} catch (Exception e) {
-			Helpers.debug("getLanguage: Error: %s\n", e.getMessage());
-			return null;
-		}
-	}
-	*/
 }
