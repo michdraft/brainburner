@@ -48,13 +48,9 @@ public class ExerciseAreas extends ArrayList<ExerciseArea> {
 
 	public static ExerciseAreas getAllExerciseAreasFromUser(DBConnection connection,
 							String username) {
-
 		int userid = Users.getUser(connection, username).getId();
 
-		String query = "select EXERCISEAREA.AREANAME, EXERCISEAREA.ID " +
-			       "from USER_TABLE_REL join EXERCISEAREA " +
-			       "on USER_TABLE_REL.EXERCISEAREAID = EXERCISEAREA.ID " +
-			       "where USER_TABLE_REL.USERID = " + userid;
+		String query = String.format("select * from exerciseareaFromUser where exerciseareaFromUser.USERID = %d", userid);
 
 		ResultSet result_set = connection.queryDB(query);
 		ExerciseAreas exerciseareas = new ExerciseAreas();
