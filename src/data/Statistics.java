@@ -22,21 +22,23 @@ public class Statistics extends ArrayList<Statistic> {
 			return false;
 	}
 
-	public static Statistics getAllStatisticsFromUser(DBConnection connection, User user) {
-		String query = String.format("select * from statistic where statistic.userid = %d", user.getId());
+	public static ArrayList<Object[]> getAllStatisticsFromUser(DBConnection connection, User user) {
+		String query = String.format("select * from getStatistic where getStatistic.userid = %d", user.getId());
 
 		ResultSet result_set = connection.queryDB(query);
-		Statistics statistics = new Statistics();
+		ArrayList<Object[]> list = new ArrayList<Object[]>();
 
 		try {
 			while (result_set.next()) {
-				statistics.add(new Statistic(result_set.getInt("USERID"),
-					result_set.getInt("EXERCISEAREAID"),
-					result_set.getInt("PERCENT"),
-					new Date(result_set.getLong("LEARNDATE"))));
+				Object[] obj = new Object[4];
+				obj[0] = result_set.getString("USERNAME");
+				obj[1] = result_set.getString("AREANAME");
+				obj[2] = result_set.getString("PERCENT");
+				obj[3] = new Date(result_set.getLong("LEARNDATE")).toLocaleString();
+				list.add(obj);
 			}
 
-			return statistics;
+			return list;
 		} catch (Exception e) {
 			Helpers.debug("getAllStatistics: Error: %s\n", e.getMessage());
 			return null;

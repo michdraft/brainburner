@@ -61,18 +61,6 @@ public class StatisticFrame extends Frame {
 	}
 
 	private ArrayList<Object[]> getData() {
-		Statistics statistics = Statistics.getAllStatisticsFromUser(connection, user);
-		ArrayList<Object[]> list = new ArrayList<Object[]>();
-
-		for (Statistic s : statistics) {
-			Object[] obj = new Object[4];
-			obj[0] = Users.getUserByID(connection, s.getUserid()).getName();
-			obj[1] = ExerciseAreas.getExerciseAreaById(connection, s.getExerciseareaid()).getAreaname();
-			obj[2] = s.getPercent();
-			obj[3] = s.getDate().toLocaleString();
-			list.add(obj);
-		}
-
-		return list;
+		return Statistics.getAllStatisticsFromUser(connection, user);
 	}
 }
