@@ -43,8 +43,7 @@ public class LoginFrame extends Frame {
 
 		lbl_header	= new JLabel("BrainBurner - Login");
 		lbl_header.setOpaque(true);
-		lbl_header.setBackground(Color.LIGHT_GRAY);
-		lbl_header.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 15));
+		lbl_header.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 18));
 
 		lbl_username	= new JLabel("Username:");
 		lbl_username.setBounds(10, 20, 70, 25);
@@ -56,9 +55,9 @@ public class LoginFrame extends Frame {
 		pwd_password	= new JPasswordField();
 		pwd_password.setBounds(90, 50, 125, 25);
 
-		lbl_register    = new JLabel("register");
+		lbl_register    = new JLabel("Register user");
 		lbl_register.setForeground(Color.blue);
-		lbl_register.setBounds(168, 75, 70, 25);
+		lbl_register.setBounds(135, 75, 100, 25);
 		lbl_register.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
@@ -128,11 +127,13 @@ public class LoginFrame extends Frame {
 	 * This method clears the input and password field
 	 */
 	public void removeLoginMask() {
-		txt_username.setText(""); pwd_password.setText("");
+		txt_username.setText("");
+		pwd_password.setText("");
 	}
 
 	public void fillLoginMask(String name, String password) {
-		txt_username.setText(name); pwd_password.setText(password);
+		txt_username.setText(name);
+		pwd_password.setText(password);
 	}
 
 	private void newUser() {

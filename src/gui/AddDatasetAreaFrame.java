@@ -19,6 +19,15 @@ public class AddDatasetAreaFrame extends Frame {
 		this.getRootPane().setDefaultButton(btn_add);
 	}
 
+	private void cleanFields() {
+		/* Clean the text boxes */
+		this.txt_question.setText("");
+		this.txt_answer.setText("");
+
+		/* Set the focus */
+		this.txt_question.requestFocus();
+	}
+
 	@SuppressWarnings("unchecked")
         // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
         private void initComponents() {
@@ -30,8 +39,6 @@ public class AddDatasetAreaFrame extends Frame {
                 txt_question = new javax.swing.JTextField();
                 txt_answer = new javax.swing.JTextField();
                 lbl_question1 = new javax.swing.JLabel();
-
-                setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
                 lbl_header.setFont(new java.awt.Font("Dialog", 1, 18));
                 lbl_header.setText("Add new Dataset");
@@ -45,7 +52,7 @@ public class AddDatasetAreaFrame extends Frame {
                         }
                 });
 
-                btn_cancel.setText("Cancel");
+                btn_cancel.setText("Close");
                 btn_cancel.addActionListener(new java.awt.event.ActionListener() {
                         public void actionPerformed(java.awt.event.ActionEvent evt) {
                                 btn_cancelActionPerformed(evt);
@@ -101,7 +108,8 @@ public class AddDatasetAreaFrame extends Frame {
 
 	private void btn_addActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_addActionPerformed
 		this.insertDataset();
-		this.toggleVisibility();
+		cleanFields();
+		//this.toggleVisibility();
 	}//GEN-LAST:event_btn_addActionPerformed
 
 	private void btn_cancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_cancelActionPerformed
@@ -125,10 +133,7 @@ public class AddDatasetAreaFrame extends Frame {
 
 	@Override
 	public void toggleVisibility() {
-		/* Clean the text boxes */
-		this.txt_answer.setText("");
-		this.txt_question.setText("");
-
+		cleanFields();
 		parent.refresh();
 		super.toggleVisibility();
 	}
