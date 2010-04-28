@@ -114,7 +114,19 @@ public class EditFrame extends Frame {
 			}
 		};
 
+		Action act_close = new AbstractAction() {
+			{
+				putValue(Action.NAME, "Close Window");
+//				putValue(Action.SMALL_ICON, icon_add);
+			}
+
+			public void actionPerformed(ActionEvent e) {
+				toggleVisibility();
+			}
+		};
+
 		toolbar.add(act_addDataset);
+		toolbar.add(act_close);
 		toolbar.add(Box.createHorizontalGlue());
 		toolbar.add(lbl_search);
 		toolbar.add(Box.createHorizontalStrut(5));
@@ -189,6 +201,7 @@ public class EditFrame extends Frame {
 	@Override
 	public void toggleVisibility() {
 		this.parent.refresh();
+		this.parent.edit_frame_lock = false;
 		super.toggleVisibility();
 	}
 

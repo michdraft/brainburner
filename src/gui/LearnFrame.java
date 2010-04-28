@@ -7,6 +7,8 @@ import data.objects.Statistic;
 import data.objects.User;
 import helper.Helpers;
 import helper.Messages;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.util.ArrayList;
 import java.util.Date;
 import javax.swing.JOptionPane;
@@ -21,11 +23,13 @@ public class LearnFrame extends Frame {
 	private double percent;
 	private int words_right, words_wrong;
 	private DBConnection connection;
+	private MainFrame parent;
 	
 	public LearnFrame(DBConnection connection, ArrayList<String[]> datasets,
-		User user, ExerciseArea exerciseareaid) {
+		User user, ExerciseArea exerciseareaid, MainFrame parent) {
 		initComponents();
 
+		this.parent = parent;
 		this.user = user;
 		this.exerciseareaid = exerciseareaid;
 		this.percent = 0;
@@ -38,6 +42,13 @@ public class LearnFrame extends Frame {
 
 		this.getRootPane().setDefaultButton(jButton1);
 		this.askQuestion();
+
+		this.addWindowListener(new WindowAdapter() {
+			@Override
+			public void windowClosing(WindowEvent e) {
+				toggleVisibilityClose();
+			}
+		});
 	}
 
 
@@ -114,9 +125,15 @@ public class LearnFrame extends Frame {
 		checkAnswer(this.txt_answer.getText().trim());
 		askQuestion();
 	}//GEN-LAST:event_jButton1ActionPerformed
+
 	@Override
 	public void toggleVisibility() {
-	    super.toggleVisibility();
+		super.toggleVisibility();
+	}
+
+	public void toggleVisibilityClose() {
+		parent.learn_frame_lock = false;
+		super.toggleVisibility();
 	}
 
 	private boolean checkIfAnswerIsEmpty() {
@@ -165,8 +182,10 @@ public class LearnFrame extends Frame {
 
 				if (res == 0)
 					learnAgain();
-				else
+				else {
 					saveStatistic();
+					parent.learn_frame_lock = false;
+				}
 			}
 		}
 	}

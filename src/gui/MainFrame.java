@@ -13,7 +13,6 @@ import javax.swing.JPanel;
 import javax.swing.JLabel;
 import java.awt.Dimension;
 import java.awt.event.MouseAdapter;
-import java.awt.event.MouseListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import javax.swing.AbstractAction;
@@ -36,6 +35,10 @@ public class MainFrame extends Frame {
 	String username;
 	OverviewTable overview_table;
 
+	public boolean edit_frame_lock = false;
+	public boolean learn_frame_lock = false;
+	public boolean statistic_frame_lock = false;
+
 	public MainFrame(DBConnection connection, User current_user, String username) {
 		this.setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
 		this.connection = connection;
@@ -44,7 +47,7 @@ public class MainFrame extends Frame {
 		tables_frame = new ExerciseAreaFrame(connection, this, username);
 		del_tables_frame = new DelExerciseAreaFrame(connection, this, username);
 		edit_table_frame = new EditExerciseAreaFrame(connection, this, username);
-		train_table_frame = new TrainExerciseAreaFrame(connection, current_user);
+		train_table_frame = new TrainExerciseAreaFrame(connection, current_user, this);
 		overview_table = new OverviewTable(connection, this.username);
 
 		this.setMinimumSize(new Dimension(800, 600));
@@ -216,27 +219,39 @@ public class MainFrame extends Frame {
 	}
 
 	private void editExerciseArea() {
-		edit_table_frame.refreshCbExerciseArea();
-		
-		if(edit_table_frame.checkComboBox()) {
-			edit_table_frame.toggleVisibility();
-		} else {
-			Messages.showInfo("There is no list to edit!");
+		if (!edit_frame_lock) {
+			edit_table_frame.refreshCbExerciseArea();
+
+			if(edit_table_frame.checkComboBox()) {
+				edit_table_frame.toggleVisibility();
+			} else {
+				Messages.showInfo("There is no list to edit!");
+			}
+
+			edit_frame_lock = true;
 		}
 	}
 
 	private void trainExerciseArea() {
-		train_table_frame.refreshCbExerciseArea();
+		if (!learn_frame_lock) {
+			train_table_frame.refreshCbExerciseArea();
 
-		if(train_table_frame.checkComboBox()) {
-			train_table_frame.toggleVisibility();
-		} else {
-			Messages.showInfo("There is no list to learn!");
+			if(train_table_frame.checkComboBox()) {
+				train_table_frame.toggleVisibility();
+			} else {
+				Messages.showInfo("There is no list to learn!");
+			}
+
+			learn_frame_lock = true;
 		}
 	}
 
 	private void showStatisticFrame() {
-		new StatisticFrame(connection, current_user).toggleVisibility();
+		if (!statistic_frame_lock) {
+			new StatisticFrame(connection, current_user, this).toggleVisibility();
+
+			statistic_frame_lock = true;
+		}
 	}
 
 	private void logout() {

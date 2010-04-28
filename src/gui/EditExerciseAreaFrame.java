@@ -99,7 +99,7 @@ public class EditExerciseAreaFrame extends Frame {
 	}//GEN-LAST:event_btn_editActionPerformed
 
 	private void btn_cancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_cancelActionPerformed
-		this.toggleVisibility();
+		this.toggleVisibilityClose();
 	}//GEN-LAST:event_btn_cancelActionPerformed
 
        /*
@@ -136,6 +136,12 @@ public class EditExerciseAreaFrame extends Frame {
 	public void toggleVisibility() {
 		super.toggleVisibility();
 	}
+
+	public void toggleVisibilityClose() {
+		parent.edit_frame_lock = false;
+		super.toggleVisibility();
+	}
+
         // Variables declaration - do not modify//GEN-BEGIN:variables
         private javax.swing.JButton btn_cancel;
         private javax.swing.JButton btn_edit;

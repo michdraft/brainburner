@@ -17,11 +17,13 @@ public class TrainExerciseAreaFrame extends Frame {
 	private DBConnection connection;
 	private User user;
 	private ArrayList<String[]> datasets;
+	private MainFrame parent;
 
-	public TrainExerciseAreaFrame(DBConnection connection, User user) {
+	public TrainExerciseAreaFrame(DBConnection connection, User user, MainFrame parent) {
 		initComponents();
 
 		this.connection = connection;
+		this.parent = parent;
 		this.user = user;
 		this.datasets = new ArrayList<String[]> ();
 
@@ -99,7 +101,7 @@ public class TrainExerciseAreaFrame extends Frame {
 		this.toggleVisibility(); this.createArrayList();
 		System.out.println(this.datasets.size());
 		if(checkIfArrayIsEmpty() == false) {
-			new LearnFrame(connection, this.datasets, user, (ExerciseArea)cb_learn_table.getSelectedItem()).toggleVisibility();
+			new LearnFrame(connection, this.datasets, user, (ExerciseArea)cb_learn_table.getSelectedItem(), parent).toggleVisibility();
 		} else {
 			Messages.showInfo(cb_learn_table.getSelectedItem().toString()+
 						" is empty!");
@@ -108,7 +110,7 @@ public class TrainExerciseAreaFrame extends Frame {
 	}//GEN-LAST:event_btn_trainActionPerformed
 
 	private void btn_cancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_cancelActionPerformed
-		this.toggleVisibility();
+		this.toggleVisibilityClose();
 	}//GEN-LAST:event_btn_cancelActionPerformed
 
        /*
@@ -139,6 +141,12 @@ public class TrainExerciseAreaFrame extends Frame {
 
 	@Override
 	public void toggleVisibility() {
+		super.toggleVisibility();
+		this.datasets = new ArrayList<String[]> ();
+	}
+
+	public void toggleVisibilityClose() {
+		parent.learn_frame_lock = false;
 		super.toggleVisibility();
 		this.datasets = new ArrayList<String[]> ();
 	}

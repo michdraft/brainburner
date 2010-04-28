@@ -22,8 +22,10 @@ public class StatisticFrame extends Frame {
 	private DBConnection connection;
 	private StatisticTable statistic;
 	private User user;
+	private MainFrame parent;
 
-	public StatisticFrame(DBConnection connection, User user) {
+	public StatisticFrame(DBConnection connection, User user, MainFrame parent) {
+		this.parent = parent;
 		this.user = user;
 		this.connection = connection;
 		statistic = new StatisticTable(connection, getData());
@@ -62,5 +64,11 @@ public class StatisticFrame extends Frame {
 
 	private ArrayList<Object[]> getData() {
 		return Statistics.getAllStatisticsFromUser(connection, user);
+	}
+
+	@Override
+	public void toggleVisibility() {
+		parent.statistic_frame_lock = false;
+		super.toggleVisibility();
 	}
 }
