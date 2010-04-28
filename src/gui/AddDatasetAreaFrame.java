@@ -109,7 +109,7 @@ public class AddDatasetAreaFrame extends Frame {
 	private void btn_addActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_addActionPerformed
 		this.insertDataset();
 		cleanFields();
-		//this.toggleVisibility();
+		parent.refresh();
 	}//GEN-LAST:event_btn_addActionPerformed
 
 	private void btn_cancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_cancelActionPerformed
