@@ -12,14 +12,25 @@ import java.util.ArrayList;
  * suitable form and also offers a method to get a single user by Name(getUser).
  */
 public class Users extends ArrayList<User> {
-	public static boolean addUser(DBConnection connection, User user) {
+	public static final int STAT_OK = 0;
+	public static final int STAT_ERROR = 1;
+	public static final int STAT_NOT_UNIQUE = 2;
+
+	public static int addUser(DBConnection connection, User user) {
+		Users users = getAllUsers(connection);
+		for (User u : users) {
+			if (u.getName().equals(user.getName())) {
+				return STAT_NOT_UNIQUE;
+			}
+		}
+
 		String query = String.format("insert into users(username,password) values('%s', '%s')",
 			user.getName(), user.getPassword());
 
 		if (connection.updateDB(query) == 1)
-			return true;
+			return STAT_OK;
 		else
-			return false;
+			return STAT_ERROR;
 	}
 
 	public static Users getAllUsers(DBConnection connection) {

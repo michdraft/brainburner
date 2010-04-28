@@ -1,0 +1,1 @@
+jdbc:derby://localhost:1527/brainburner_test;user=test;password=test;create=true

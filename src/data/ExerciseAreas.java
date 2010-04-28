@@ -6,14 +6,26 @@ import helper.Helpers;
 import java.sql.ResultSet;
 
 public class ExerciseAreas extends ArrayList<ExerciseArea> {
-	public static boolean addExerciseArea(DBConnection connection, ExerciseArea exercisearea,
+	public static final int STAT_OK = 0;
+	public static final int STAT_ERROR = 1;
+	public static final int STAT_NOT_UNIQUE = 2;
+
+	public static int addExerciseArea(DBConnection connection, ExerciseArea exercisearea,
 						String username, String languagename) {
+
+		ExerciseAreas areas = getAllExerciseAreasFromUser(connection, username);
+		for (ExerciseArea area : areas) {
+			if (area.getAreaname().equals(exercisearea.getAreaname())) {
+				return STAT_NOT_UNIQUE;
+			}
+		}
+
 		String query = String.format("insert into exercisearea(areaname) values('%s')", exercisearea.getAreaname());
 
 		if (connection.updateDB(query) == 1) {
 			int userid = Users.getUser(connection, username).getId();
 			int exerciseareaid = ExerciseAreas.getExerciseArea(connection, exercisearea.getAreaname()).getId();
-			String query_user_rel = 
+			String query_user_rel =
 				"insert into user_table_rel(userid, exerciseareaid)" +
 				"values(" + userid + "," + exerciseareaid + ")";
 			if(connection.updateDB(query_user_rel) == 1) {
@@ -22,10 +34,16 @@ public class ExerciseAreas extends ArrayList<ExerciseArea> {
 					"insert into lang_table_rel(languageid, exerciseareaid)" +
 					"values(" + languageid + "," + exerciseareaid + ")");
 				if(connection.updateDB(query_lang_rel) == 1) {
-					return true;
-				} else { return false; }
-			} else { return false; }
-		} else { return false; }
+					return STAT_OK;
+				} else {
+					return STAT_ERROR;
+				}
+			} else {
+				return STAT_ERROR;
+			}
+		} else {
+			return STAT_ERROR;
+		}
 	}
 
 	public static ExerciseAreas getAllExerciseAreas(DBConnection connection) {

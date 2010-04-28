@@ -1,7 +1,7 @@
 -- Table exercisearea
 create table exercisearea (
 	id int primary key not null generated always as identity,
-	areaname varchar(150)
+	areaname varchar(150) unique
 );
 
 -- Table pool
@@ -15,7 +15,7 @@ create table pool (
 -- Table users
 create table users (
 	id int primary key not null generated always as identity,
-	username varchar(50) not null,
+	username varchar(50) not null unique,
 	password varchar(32) not null
 );
 

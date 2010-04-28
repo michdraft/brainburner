@@ -27,7 +27,6 @@ import javax.swing.JTextField;
 public class LoginFrame extends Frame {
 
 	private DBConnection connection;
-	private UsersFrame users_frame;
 	private MainFrame main_frame;
 
 	private JLabel lbl_header, lbl_username, lbl_password, lbl_register;
@@ -39,7 +38,6 @@ public class LoginFrame extends Frame {
 	public LoginFrame(final DBConnection connection) {
 		this.setDefaultCloseOperation(EXIT_ON_CLOSE);
 		this.connection = connection;
-		this.users_frame = new UsersFrame(connection);
 
 		lbl_header	= new JLabel("BrainBurner - Login");
 		lbl_header.setOpaque(true);
@@ -120,7 +118,7 @@ public class LoginFrame extends Frame {
 	}	
 
 	private void showRegisterWindow() {
-		new UsersFrame(connection).toggleVisibility();
+		new UsersFrame(connection, this).toggleVisibility();
 	}
 
 	/*
@@ -134,10 +132,6 @@ public class LoginFrame extends Frame {
 	public void fillLoginMask(String name, String password) {
 		txt_username.setText(name);
 		pwd_password.setText(password);
-	}
-
-	private void newUser() {
-		users_frame.toggleVisibility();
 	}
 
 	private void login(User user) {

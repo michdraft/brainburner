@@ -8,9 +8,12 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
+import java.awt.event.MouseEvent;
 import javax.swing.JPanel;
 import javax.swing.JLabel;
 import java.awt.Dimension;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import javax.swing.AbstractAction;
@@ -29,7 +32,7 @@ public class MainFrame extends Frame {
 	EditExerciseAreaFrame edit_table_frame;
 	TrainExerciseAreaFrame train_table_frame;
 	JPanel southPanel;
-	JLabel currentUser;
+	JLabel currentUser, lbl_logout;
 	String username;
 	OverviewTable overview_table;
 
@@ -96,7 +99,6 @@ public class MainFrame extends Frame {
 		final Icon icon_delete = new ImageIcon("data/icons/delete.png");
 		final Icon icon_exercise = new ImageIcon("data/icons/exercise.png");
 		final Icon icon_statistic = new ImageIcon("data/icons/medal_gold_2.png");
-		final Icon icon_help = new ImageIcon("data/icons/help.png");
 
 		Action act_newTable = new AbstractAction() {
 			{
@@ -146,6 +148,7 @@ public class MainFrame extends Frame {
 			{
 				putValue(Action.NAME, "Statistic");
 				putValue(Action.SMALL_ICON, icon_statistic);
+				putValue(Action.SHORT_DESCRIPTION ,"Statistik anezigen");
 			}
 
 			public void actionPerformed(ActionEvent e) {
@@ -153,23 +156,11 @@ public class MainFrame extends Frame {
 			}
 		};
 
-		Action act_help = new AbstractAction() {
-			{
-				putValue(Action.NAME, "Help");
-				putValue(Action.SMALL_ICON, icon_help);
-			}
-
-			public void actionPerformed(ActionEvent e) {
-				throw new UnsupportedOperationException("Not supported yet.");
-			}
-		};
-	
 		toolbar.add(act_newTable);
 		toolbar.add(act_edit);
 		toolbar.add(act_delTable);
 		toolbar.add(act_exercise);
 		toolbar.add(act_statistic);
-		toolbar.add(act_help);
 		toolbar.setFloatable(false);
 		toolbar.add(Box.createHorizontalGlue());
 
@@ -189,7 +180,17 @@ public class MainFrame extends Frame {
 	private void borderLayoutSouth() {
 		southPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
 		currentUser = new JLabel("Logged in as: " + current_user.getName());
+		lbl_logout = new JLabel("( logout )");
+		lbl_logout.setForeground(Color.blue);
+		lbl_logout.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				logout();
+			}
+		});
+
 		southPanel.add(currentUser, BorderLayout.SOUTH);
+		southPanel.add(lbl_logout, BorderLayout.SOUTH);
 		southPanel.setBackground(Color.LIGHT_GRAY);
 		this.add(southPanel, BorderLayout.SOUTH);
 	}
@@ -236,5 +237,10 @@ public class MainFrame extends Frame {
 
 	private void showStatisticFrame() {
 		new StatisticFrame(connection, current_user).toggleVisibility();
+	}
+
+	private void logout() {
+		this.toggleVisibility();
+		new LoginFrame(connection).toggleVisibility();
 	}
 }

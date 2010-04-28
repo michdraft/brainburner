@@ -11,11 +11,13 @@ import data.Users;
  */
 public class UsersFrame extends Frame {
 
-	DBConnection connection;
+	private DBConnection connection;
+	private LoginFrame parent;
 
-	public UsersFrame(DBConnection connection) {
+	public UsersFrame(DBConnection connection, LoginFrame parent) {
 		initComponents();
 		this.connection = connection;
+		this.parent = parent;
 
 		this.getRootPane().setDefaultButton(btn_create);
 	}
@@ -121,12 +123,24 @@ public class UsersFrame extends Frame {
 		    User user = new User(username, new String(password));
 		    user.encryptPassword();
 
-		    if (Users.addUser(connection, user)) {
+		    int ret = Users.addUser(connection, user);
+		    if (ret == Users.STAT_OK) {
 			    Messages.showInfo("User " + username + " succesfuly created!");
+			    parent.fillLoginMask(username, new String(password));
 			    this.setVisible(false);
+		    } else if (ret == Users.STAT_NOT_UNIQUE) {
+			    Messages.showError("An user with this name already exists!");
+			    cleanFields();
 		    }
 	    }
     }//GEN-LAST:event_btn_createActionPerformed
+
+    private void cleanFields() {
+	    txt_username.setText("");
+	    txt_password.setText("");
+	    txt_password2.setText("");
+	    txt_username.requestFocus();
+    }
 
     private void btn_cancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_cancelActionPerformed
 	    this.toggleVisibility();

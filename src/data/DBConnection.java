@@ -6,6 +6,7 @@ import java.sql.Statement;
 import java.sql.ResultSet;
 
 import helper.*;
+import java.sql.SQLException;
 
 /**
  * DBConnection.java, Package: data
@@ -41,7 +42,7 @@ public class DBConnection {
 			int n = statement.executeUpdate(query);
 			Helpers.debug("updateDB: Info: %d lines updated.\n", n);
 			return n;
-		} catch (Exception e) {
+		} catch (SQLException e) {
 			Helpers.debug("updateDB: Error: %s", e.getMessage());
 			return -1;
 		}

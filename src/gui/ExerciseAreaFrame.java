@@ -126,18 +126,28 @@ public class ExerciseAreaFrame extends Frame {
 
 	private void btn_createActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_createActionPerformed
 		String areaname = txt_name.getText().trim();
-		String languagename = cb_language.getSelectedItem().toString();
+		String languagename;
 
 		if(areaname.isEmpty()) {
 			Messages.showWarning("Don't forget inputting a name!");
 		} else {
-			ExerciseArea exercisearea = new ExerciseArea(areaname);
+			if (cb_language.getItemCount() == 0) {
+				Messages.showWarning("You have to create a languge first!");
+			} else {
+				areaname = txt_name.getText().trim();
+				languagename = cb_language.getSelectedItem().toString();
 
-			if (ExerciseAreas.addExerciseArea(connection, exercisearea, 
-				username, languagename)) {
-				Messages.showInfo("Learn Table " +
-					exercisearea + " succesfuly created!");
-				this.toggleVisibility();
+				ExerciseArea exercisearea = new ExerciseArea(areaname);
+
+				int ret = ExerciseAreas.addExerciseArea(connection, exercisearea, username, languagename);
+				if (ret == ExerciseAreas.STAT_OK) {
+					Messages.showInfo("Learn Table " +
+						exercisearea + " succesfuly created!");
+					this.toggleVisibility();
+				} else if (ret == ExerciseAreas.STAT_NOT_UNIQUE) {
+					Messages.showError("There is already an area with this name!");
+					clearFields();
+				}
 			}
 		}
 	}//GEN-LAST:event_btn_createActionPerformed
@@ -160,6 +170,11 @@ public class ExerciseAreaFrame extends Frame {
 		}
 	}
 
+	private void clearFields() {
+		txt_name.setText("");
+		txt_name.requestFocus();
+	}
+
 	public void refresh() {
 		cb_language.removeAllItems();
 		showLanguagesInJComboBox();
@@ -167,6 +182,7 @@ public class ExerciseAreaFrame extends Frame {
 
 	@Override
 	public void toggleVisibility() {
+		clearFields();
 		parent.refresh();
 		super.toggleVisibility();
 	}
