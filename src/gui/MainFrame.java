@@ -244,11 +244,11 @@ public class MainFrame extends Frame {
 			if(edit_table_frame.checkComboBox()) {
 				System.out.println(edit_table_frame.checkComboBox());
 				edit_table_frame.toggleVisibility();
+				edit_frame_lock = true;
 			} else {
 				Messages.showInfo("There is no list to edit!");
+				edit_frame_lock = false;
 			}
-
-			edit_frame_lock = true;
 		}
 	}
 
@@ -258,11 +258,11 @@ public class MainFrame extends Frame {
 
 			if(train_table_frame.checkComboBox()) {
 				train_table_frame.toggleVisibility();
+				learn_frame_lock = true;
 			} else {
 				Messages.showInfo("There is no list to learn!");
+				learn_frame_lock = false;
 			}
-
-			learn_frame_lock = true;
 		}
 	}
 
