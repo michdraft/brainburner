@@ -114,6 +114,7 @@ public class LoginFrame extends Frame {
 			}
 		} else {
 			Messages.showError("User " + username + " doesn't exist!");
+			this.removeLoginMask();
 		}
 	}	
 

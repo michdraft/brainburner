@@ -1,6 +1,8 @@
 package gui;
 
 import data.DBConnection;
+import data.ExerciseAreas;
+import data.objects.ExerciseArea;
 import data.objects.OverviewTable;
 import data.objects.User;
 import helper.Messages;
@@ -15,6 +17,7 @@ import java.awt.Dimension;
 import java.awt.event.MouseAdapter;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.util.ArrayList;
 import javax.swing.AbstractAction;
 import javax.swing.Action;
 import javax.swing.Box;
@@ -102,6 +105,21 @@ public class MainFrame extends Frame {
 		final Icon icon_delete = new ImageIcon("data/icons/delete.png");
 		final Icon icon_exercise = new ImageIcon("data/icons/exercise.png");
 		final Icon icon_statistic = new ImageIcon("data/icons/medal_gold_2.png");
+		final Icon icon_delete_user = new ImageIcon("data/icons/user_delete.png");
+
+		JLabel lbl_delete = new JLabel("Delete user", icon_delete_user, 0);
+		lbl_delete.setIconTextGap(5);
+		lbl_delete.setForeground(Color.blue);
+
+		lbl_delete.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				if(deleteWarning() == true) {
+					deleteUserprofil();
+					deleteUser();
+				}
+			}
+		});
 
 		Action act_newTable = new AbstractAction() {
 			{
@@ -159,13 +177,15 @@ public class MainFrame extends Frame {
 			}
 		};
 
+		toolbar.setFloatable(false);
 		toolbar.add(act_newTable);
 		toolbar.add(act_edit);
 		toolbar.add(act_delTable);
 		toolbar.add(act_exercise);
 		toolbar.add(act_statistic);
-		toolbar.setFloatable(false);
 		toolbar.add(Box.createHorizontalGlue());
+		toolbar.add(lbl_delete);
+		toolbar.add(Box.createHorizontalStrut(5));
 
 		secondRow.add(toolbar);
 		
@@ -221,8 +241,8 @@ public class MainFrame extends Frame {
 	private void editExerciseArea() {
 		if (!edit_frame_lock) {
 			edit_table_frame.refreshCbExerciseArea();
-
 			if(edit_table_frame.checkComboBox()) {
+				System.out.println(edit_table_frame.checkComboBox());
 				edit_table_frame.toggleVisibility();
 			} else {
 				Messages.showInfo("There is no list to edit!");
@@ -251,6 +271,42 @@ public class MainFrame extends Frame {
 			new StatisticFrame(connection, current_user, this).toggleVisibility();
 
 			statistic_frame_lock = true;
+		}
+	}
+
+	private boolean deleteWarning() {
+		int number = ExerciseAreas.getNumberOfExerciseAreasFromUser(connection, this.username);
+		
+		Object[] options = {"Yes", "No"};
+		int result = JOptionPane.showOptionDialog(null,
+			"You have " + number + " Learn Tables on your profil!\n" +
+			"Would you like to delete your profil yet?",
+			"Delete user",
+			JOptionPane.YES_NO_OPTION,
+			JOptionPane.WARNING_MESSAGE,
+			null, options, null);
+
+		if(result == 0) 
+			return true;
+		else
+			return false;
+	}
+
+	private void deleteUser() {
+		String sql_delete = "delete from users " +
+		"where users.username = '" + this.username + "'";
+		if(connection.updateDB(sql_delete) == 1) {
+			this.toggleVisibility();
+			new LoginFrame(connection).toggleVisibility();
+		} 
+	}
+
+	private void deleteUserprofil() {
+		ArrayList<ExerciseArea> exerciseareas = ExerciseAreas.getAllExerciseAreasFromUser(this.connection, this.username);
+		for(int i=0; i<exerciseareas.size(); i++) {
+			String sql_delete = "delete from exercisearea " +
+				"where exercisearea.areaname = '" + exerciseareas.get(i).toString() + "'";
+			connection.updateDB(sql_delete);
 		}
 	}
 

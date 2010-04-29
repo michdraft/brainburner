@@ -85,6 +85,27 @@ public class ExerciseAreas extends ArrayList<ExerciseArea> {
 		}
 	}
 
+	public static int getNumberOfExerciseAreasFromUser(DBConnection connection,
+							String username) {
+
+		int userid = Users.getUser(connection, username).getId();
+		int number = 0;
+
+		String query = String.format("select count(*) as number " +
+			"from exerciseareaFromUser where exerciseareaFromUser.USERID = %d", userid);
+		ResultSet result_set = connection.queryDB(query);
+
+		try {
+			while(result_set.next()) {
+				return result_set.getInt("number");
+			}
+		} catch (Exception e) {
+			Helpers.debug("getNumberOfExerciseAreas: Error: %s\n", e.getMessage());
+		}
+		
+		return number;
+	}
+
 	public static ExerciseArea getExerciseArea(DBConnection connection, String areaname) {
 		String query = String.format("select * from exercisearea where areaname='%s'", areaname);
 

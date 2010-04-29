@@ -23,7 +23,7 @@ create table users (
 create table user_table_rel (
 	id int primary key not null generated always as identity,
 	exerciseareaid int references exercisearea(id) on delete cascade,
-	userid int references users(id)
+	userid int references users(id) on delete cascade
 );
 
 -- Table languages
@@ -42,7 +42,7 @@ create table lang_table_rel (
 -- Table statistic
 create table statistic (
 	id int primary key not null generated always as identity,
-	userid int references users(id),
+	userid int references users(id) on delete cascade,
 	exerciseareaid int references exercisearea(id) on delete cascade,
 	percent decimal,
 	learndate bigint

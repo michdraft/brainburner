@@ -144,6 +144,7 @@ public class ExerciseAreaFrame extends Frame {
 					Messages.showInfo("Learn Table " +
 						exercisearea + " succesfuly created!");
 					this.toggleVisibility();
+
 				} else if (ret == ExerciseAreas.STAT_NOT_UNIQUE) {
 					Messages.showError("There is already an area with this name!");
 					clearFields();
