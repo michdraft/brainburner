@@ -5,6 +5,8 @@ import data.DBConnection;
 import data.ExerciseAreas;
 import helper.Helpers;
 import helper.Messages;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -28,6 +30,13 @@ public class TrainExerciseAreaFrame extends Frame {
 		this.datasets = new ArrayList<String[]> ();
 
 		this.getRootPane().setDefaultButton(btn_train);
+		
+		this.addWindowListener(new WindowAdapter() {
+			@Override
+			public void windowClosing(WindowEvent event) {
+				toggleVisibilityClose();
+			}
+		});
 	}
 
 	@SuppressWarnings("unchecked")

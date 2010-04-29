@@ -93,9 +93,9 @@ public class ExerciseAreaFrame extends Frame {
                                                                 .addComponent(btn_create)
                                                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                                                 .addComponent(btn_cancel)))))
-                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addContainerGap(12, Short.MAX_VALUE))
                         .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addContainerGap(163, Short.MAX_VALUE)
+                                .addContainerGap(165, Short.MAX_VALUE)
                                 .addComponent(lbl_newlanguage)
                                 .addContainerGap())
                 );

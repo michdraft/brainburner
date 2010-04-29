@@ -3,6 +3,8 @@ package gui;
 import data.objects.*;
 import data.DBConnection;
 import data.ExerciseAreas;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 
 /**
  * EditExerciseAreaFrame.java, package: gui
@@ -22,6 +24,13 @@ public class EditExerciseAreaFrame extends Frame {
 		this.username = username;
 
 		this.getRootPane().setDefaultButton(btn_edit);
+
+		this.addWindowListener(new WindowAdapter() {
+			@Override
+			public void windowClosing(WindowEvent event) {
+				toggleVisibilityClose();
+			}
+		});
 	}
 
 	@SuppressWarnings("unchecked")
